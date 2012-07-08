@@ -1,0 +1,5 @@
+#grid, #grid tr, #grid td {
+    border: 1px solid black;
+    min-width: 1%;
+    min-height: 1%;
+}
