@@ -4,11 +4,15 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="design.css" />
     <title>FFDoku</title>
-    
+    <script src="utils.js"></script>
+    <script src="Game.class.js"></script>
+    <script src="Grid.class.js"></script>
     <script type="text/javascript">
-      function getEvtCell(e) {
-
-      }
+    	window.addEventListener('load', init, false);
+    	
+    	function init() {
+    		grid = new Grid();
+  		}
     </script>
   </head>
   <body>
@@ -17,112 +21,12 @@
     </header>
     <section>
       <table id="grid">
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
-	<tr>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	  <td class="cell"></td>
-	</tr>
       </table>
     </section>
     <nav>
     	<ul>
-    		<li>New Game</li>
-    		<li>Difficulty</li>
-    		<li>Quit</li>
+    		<li id="newGame">New Game</li>
+    		<li id="reset">Reset</li>
     	</ul>
     </nav>
   </body>
