@@ -1,5 +1,24 @@
 #grid, #grid tr, #grid td {
-    border: 1px solid black;
-    min-width: 1%;
-    height: 10px;
+  border: 1px solid black;
+}
+
+#grid td {
+  width: 30px;
+  height: 35px;
+}
+
+.hidden {
+	display: none;
+}
+
+.displayed {
+	display: block;
+}
+
+.number, .cell {
+  text-align: center;
+}
+
+.number {
+  background-color: yellow;
 }
