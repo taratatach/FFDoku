@@ -9,7 +9,7 @@ function Game() {
 
 
 Game.prototype.newGame = function () {
-	this.generateGrid();
+	//this.generateGrid();
 }
 
 Game.prototype.respect = function (nb, l, c) {

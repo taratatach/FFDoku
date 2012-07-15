@@ -1,10 +1,31 @@
-#grid, #grid tr, #grid td {
-  border: 1px solid black;
+body {
+	text-align: center;
+	font-family: Ubuntu;
+}
+
+table {
+	border-collapse: collapse;
+	margin: auto;
+	border: 2px solid black;
 }
 
 #grid td {
-  width: 30px;
-  height: 35px;
+	width: 42px;
+	height: 42px;
+	border: 1px solid black;
+}
+
+#menu {
+	padding: 0px;
+	list-style-type: none;
+}
+
+#menu li {
+	display: inline;
+}
+
+#menu input {
+	width: 120px;
 }
 
 .hidden {
@@ -16,9 +37,9 @@
 }
 
 .number, .cell {
-  text-align: center;
+	text-align: center;
 }
 
 .number {
-  background-color: yellow;
+	background-color: yellow;
 }
