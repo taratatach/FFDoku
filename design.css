@@ -47,6 +47,7 @@ body {
 
 .number, .cell {
 	text-align: center;
+  width: 42px;
 }
 
 .number {

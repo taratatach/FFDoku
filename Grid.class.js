@@ -4,10 +4,26 @@
  */
 
 function Grid (game) {
-	var table = document.getElementById('grid');
 	
+ 	/* Initialize attributes */
+ 	this.game = game;
+ 	
+ 	this.commands = document.getElementById('commands');
+ 	this.commands.className = 'hidden';
+ 	this.newGame = document.getElementById('newGame');
+ 	this.reset = document.getElementById('reset');
+ 	this.inserts = document.getElementsByClassName('insert');
+ 	this.erase = document.getElementById('erase');
+  	
+  this.initGrid(this.game.baseGrid);
 	
-	/* Initialize attributes */
+ 	this.modifiedCell = null;
+}
+
+Grid.prototype.initGrid = function (gameGrid) {
+  var self = this;
+  var table = document.getElementById('grid');
+	
 	this.cells = new Array(9);
 	for (i=0; i<9; i++) {
 		var tr = document.createElement('tr');
@@ -16,31 +32,27 @@ function Grid (game) {
 		this.cells[i] = new Array(9);
 		for (j=0; j<9; j++) {
 			var td = document.createElement('td');
+			var input = document.createElement('input');
 			
-			if (game.grid[i][j] == null)
-				td.className = 'cell';
+			input.type = "text";
+			input.id = String((i+1) + '-' + (j+1));
+			if (gameGrid[i][j] == null)
+				input.className = 'cell';
 			else {
-				td.className = 'number';
-				td.innerHTML = game.grid[i][j];
+				input.className = 'number';
+				input.value = gameGrid[i][j];
+				input.setAttribute('disabled', 'disabled');
 			}
-			td.id = String(i + '-' + j);
+			
+			td.appendChild(input);
 			tr.appendChild(td);
 			
-			this.cells[i][j] = td;
+			this.cells[i][j] = input;
 		}			
 	}
-	this.commands = document.getElementById('commands');
-	this.commands.className = 'hidden';
-	this.newGame = document.getElementById('newGame');
-	this.reset = document.getElementById('reset');
-	this.inserts = document.getElementsByClassName('insert');
-	this.erase = document.getElementById('erase');
 	
-	this.modifiedCell = null;
-	
-	this.game = game;
-	/* Add events */
-	this.addEvents();
+  /* Add events */
+ 	self.addEvents.call(self);
 }
 
 Grid.prototype.addEvents = function () {
@@ -48,7 +60,7 @@ Grid.prototype.addEvents = function () {
 	
 	document.addEventListener('click', 
 		function(e) {
-			self.getEvtBody.call(self, e)
+			self.getEvtBody.call(self, e);
 		},
 	true);
 	
@@ -56,41 +68,44 @@ Grid.prototype.addEvents = function () {
 	for(i=0; i<cells.length; i++) {
 		cells[i].addEventListener('click',
 			function(e) {
-				self.getEvtClickCell.call(self, e)
+				self.getEvtClickCell.call(self, e);
 			}, 
 		false);
 		cells[i].addEventListener('change',
 			function(e) {
-				self.getEvtChangeCell.call(self, e)
+				self.getEvtChangeCell.call(self, e);
 			},
 		false);
 	}
 	
   this.newGame.addEventListener('click', self.getEvtNewGame, false);
   
-  this.reset.addEventListener('click', self.getEvtReset, false);
+  this.reset.addEventListener('click',
+    function() {
+      self.getEvtReset.call(self);
+    },
+  false);
   
 	for(i=0; i<this.inserts.length; i++)
 		this.inserts[i].addEventListener('click',
 			function(e) {
-				self.getEvtInsert.call(self, e)
+				self.getEvtInsert.call(self, e);
 			},
 		false);
 	
 	this.erase.addEventListener('click',
 	  function() {
-	    self.getEvtErase.call(self)
+	    self.getEvtErase.call(self);
 	  },
 	false);
 }
 
 Grid.prototype.getEvtBody = function (e) {
-	if (e.target.nodeName != 'TD')
+	if (e.target.nodeName != 'INPUT')
 		this.commands.className = 'hidden';
 }
 
 Grid.prototype.getEvtClickCell = function (e) {
-	console.log(e);
 	this.modifiedCell = e.target;
 	if (this.commands.className == 'hidden') {
 		var strs = this.modifiedCell.id.split('-');
@@ -102,24 +117,34 @@ Grid.prototype.getEvtClickCell = function (e) {
 
 Grid.prototype.getEvtChangeCell = function (e) {
 	this.modifiedCell = e.target;
-	// check if value inserted is correct
+
+	// get cell value, cell line and cell column
+	var value = this.modifiedCell.value;
 	var strs = this.modifiedCell.id.split('-');
-	var line = parseInt(strs[0]);
-	var col = parseInt(strs[1]);
-	// otherwise change background to red
-	if (!this.game.respect(this.modifiedCell.value, line, col))
+	var line = parseInt(strs[0])-1;
+	var col = parseInt(strs[1])-1;
+	
+	// insert value in Game.grid
+	this.game.changeValue(value,  line, col);
+	
+	// check if value inserted is correct, otherwise change background to red
+	if (!this.game.checkInsert(value, line, col))
 		this.modifiedCell.className = 'cell wrong';
 	else
 		this.modifiedCell.className = 'cell right';
 }
 
 Grid.prototype.getEvtInsert = function (e) {
-	this.modifiedCell.innerHTML = e.target.innerHTML;
+	this.modifiedCell.value = e.target.innerHTML;
 	this.commands.className = 'hidden';
+	var event = document.createEvent('HTMLEvents');  
+  event.initEvent('change',true,false);  
+  this.modifiedCell.dispatchEvent(event);
 }
 
 Grid.prototype.getEvtErase = function() {
-  this.modifiedCell.innerHTML = '';
+  this.modifiedCell.value = '';
+  this.modifiedCell.className = 'cell';
   this.commands.className = 'hidden';
  }
 
@@ -127,6 +152,13 @@ Grid.prototype.getEvtNewGame = function (e) {
 	alert('new game');
 }
 
-Grid.prototype.getEvtReset = function (e) {
-	alert('reset');
+Grid.prototype.getEvtReset = function () {
+  this.game.resetGame();
+  
+  /* delete previous grid */
+  var table =  document.getElementById('grid');
+  table.innerHTML = '';
+  
+  /* init new grid */
+	this.initGrid(this.game.baseGrid);
 }
