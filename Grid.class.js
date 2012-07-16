@@ -5,8 +5,7 @@
 
 function Grid (game) {
 	var table = document.getElementById('grid');
-	this.commands = document.getElementById('commands');
-	this.commands.className = 'hidden';
+	
 	
 	/* Initialize attributes */
 	this.cells = new Array(9);
@@ -19,23 +18,27 @@ function Grid (game) {
 			var td = document.createElement('td');
 			
 			if (game.grid[i][j] == null)
-  			td.className = 'cell';
-	    else {
-	      td.className = 'number';
-	      td.innerHTML = game.grid[i][j];
-	    }
-	    
+				td.className = 'cell';
+			else {
+				td.className = 'number';
+				td.innerHTML = game.grid[i][j];
+			}
+			td.id = String(i + '-' + j);
 			tr.appendChild(td);
 			
 			this.cells[i][j] = td;
 		}			
 	}
+	this.commands = document.getElementById('commands');
+	this.commands.className = 'hidden';
 	this.newGame = document.getElementById('newGame');
 	this.reset = document.getElementById('reset');
-	this.modifiedCell = null;
 	this.inserts = document.getElementsByClassName('insert');
 	this.erase = document.getElementById('erase');
 	
+	this.modifiedCell = null;
+	
+	this.game = game;
 	/* Add events */
 	this.addEvents();
 }
@@ -87,18 +90,27 @@ Grid.prototype.getEvtBody = function (e) {
 }
 
 Grid.prototype.getEvtClickCell = function (e) {
-	console.log(this);
+	console.log(e);
 	this.modifiedCell = e.target;
-	if (this.commands.className == 'hidden')
-		this.commands.className = 'displayed';
+	if (this.commands.className == 'hidden') {
+		var strs = this.modifiedCell.id.split('-');
+		this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
+	}
 	else
 		this.commands.className = 'hidden';
 }
 
 Grid.prototype.getEvtChangeCell = function (e) {
+	this.modifiedCell = e.target;
 	// check if value inserted is correct
-	
+	var strs = this.modifiedCell.id.split('-');
+	var line = parseInt(strs[0]);
+	var col = parseInt(strs[1]);
 	// otherwise change background to red
+	if (!this.game.respect(this.modifiedCell.value, line, col))
+		this.modifiedCell.className = 'cell wrong';
+	else
+		this.modifiedCell.className = 'cell right';
 }
 
 Grid.prototype.getEvtInsert = function (e) {

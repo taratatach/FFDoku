@@ -3,7 +3,7 @@ body {
 	font-family: Ubuntu;
 }
 
-table {
+#grid , #commands{
 	border-collapse: collapse;
 	margin: auto;
 	border: 2px solid black;
@@ -13,6 +13,14 @@ table {
 	width: 42px;
 	height: 42px;
 	border: 1px solid black;
+}
+
+#commands {
+	background-color: white;
+}
+
+#commands table {
+	margin: auto;
 }
 
 #menu {
@@ -33,7 +41,8 @@ table {
 }
 
 .displayed {
-	display: block;
+	position: relative;
+	display: inline-block;
 }
 
 .number, .cell {
@@ -42,4 +51,70 @@ table {
 
 .number {
 	background-color: yellow;
+	font-weight: bold;
+}
+
+.wrong {
+	background-color: red;
+}
+
+.right {
+	background-color: green;
+}
+
+/* Positions des cases pour placer le menu des chiffres au dessus */
+.line_1 {
+	top: -420px;
+}
+.line_2 {
+	top: -376px;
+}
+.line_3 {
+	top: -332px;
+}
+.line_4 {
+	top: -288px;
+}
+.line_5 {
+	top: -244px;
+}
+.line_6 {
+	top: -200px;
+}
+.line_7 {
+	top: -156px;
+}
+.line_8 {
+	top: -112px;
+}
+.line_9 {
+	top: -78px;
+}
+
+.col_1 {
+	left: -176px;
+}
+.col_2 {
+	left: -132px;
+}
+.col_3 {
+	left: -88px;
+}
+.col_4 {
+	left: -44px;
+}
+.col_5 {
+	left: 0px;
+}
+.col_6 {
+	left: 44px;
+}
+.col_7 {
+	left: 88px;
+}
+.col_8 {
+	left: 132px;
+}
+.col_9 {
+	left: 176px;
 }

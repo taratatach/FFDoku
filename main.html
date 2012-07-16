@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="design.css" />
     <title>FFDoku</title>
-    <script src="utils.js"></script>
+	<script src="sudokuSolver.js"></script>
+	<script src="utils.js"></script>
     <script src="Game.class.js"></script>
     <script src="Grid.class.js"></script>
   </head>
@@ -47,7 +48,7 @@
     	
     	function init() {
     	  var game = new Game();
-    	  game.newGame();
+    	  game.newGame('hard');
     		var grid = new Grid(game);
   		}
     </script>
