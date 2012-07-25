@@ -3,6 +3,10 @@ body {
 	font-family: Ubuntu;
 }
 
+input {
+	border:none;
+}
+
 #grid , #commands{
 	border-collapse: collapse;
 	margin: auto;
@@ -15,7 +19,7 @@ body {
 	border: 1px solid black;
 }
 
-#commands {
+#commands, #gameInfos {
 	background-color: white;
 }
 
@@ -45,9 +49,13 @@ body {
 	display: inline-block;
 }
 
+.center {
+	top: -244px;
+}
+
 .number, .cell {
 	text-align: center;
-  width: 42px;
+	width: 42px;
 }
 
 .number {

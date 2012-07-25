@@ -4,25 +4,27 @@
  */
 
 function Grid (game) {
+ 	/* Initialize attributes */ 	
+	this.game = game;
 	
- 	/* Initialize attributes */
- 	this.game = game;
- 	
  	this.commands = document.getElementById('commands');
  	this.commands.className = 'hidden';
+	this.gameInfos = document.getElementById('gameInfos');
+	this.gameInfos.className = 'hidden';
  	this.newGame = document.getElementById('newGame');
+	this.startGame = document.getElementById('startGame');
  	this.reset = document.getElementById('reset');
  	this.inserts = document.getElementsByClassName('insert');
  	this.erase = document.getElementById('erase');
   	
-  this.initGrid(this.game.baseGrid);
+	this.initGrid(this.game.baseGrid);
 	
  	this.modifiedCell = null;
 }
 
 Grid.prototype.initGrid = function (gameGrid) {
-  var self = this;
-  var table = document.getElementById('grid');
+	var self = this;
+	var table = document.getElementById('grid');
 	
 	this.cells = new Array(9);
 	for (i=0; i<9; i++) {
@@ -78,13 +80,23 @@ Grid.prototype.addEvents = function () {
 		false);
 	}
 	
-  this.newGame.addEventListener('click', self.getEvtNewGame, false);
+	this.newGame.addEventListener('click',
+		function() {
+			self.getEvtNewGame.call(self);
+		},
+	false);
+	
+	this.startGame.addEventListener('click',
+		function() {
+			self.getEvtStartGame.call(self);
+		},
+	false);
   
-  this.reset.addEventListener('click',
-    function() {
-      self.getEvtReset.call(self);
-    },
-  false);
+	this.reset.addEventListener('click',
+		function() {
+			self.getEvtReset.call(self);
+		},
+	false);
   
 	for(i=0; i<this.inserts.length; i++)
 		this.inserts[i].addEventListener('click',
@@ -103,6 +115,12 @@ Grid.prototype.addEvents = function () {
 Grid.prototype.getEvtBody = function (e) {
 	if (e.target.nodeName != 'INPUT')
 		this.commands.className = 'hidden';
+	if (e.target.id != 'gameInfos'
+		&& e.target.parentNode.id != 'gameInfos'
+		&& e.target.parentNode.parentNode.id != 'gameInfos'
+		&& e.target.parentNode.parentNode.parentNode.id != 'gameInfos') {
+		this.gameInfos.className = 'hidden';
+	}
 }
 
 Grid.prototype.getEvtClickCell = function (e) {
@@ -128,7 +146,7 @@ Grid.prototype.getEvtChangeCell = function (e) {
 	this.game.changeValue(value,  line, col);
 	
 	// check if value inserted is correct, otherwise change background to red
-	if (!this.game.checkInsert(value, line, col))
+	if (!this.game.respect(value, line, col))
 		this.modifiedCell.className = 'cell wrong';
 	else
 		this.modifiedCell.className = 'cell right';
@@ -138,27 +156,43 @@ Grid.prototype.getEvtInsert = function (e) {
 	this.modifiedCell.value = e.target.innerHTML;
 	this.commands.className = 'hidden';
 	var event = document.createEvent('HTMLEvents');  
-  event.initEvent('change',true,false);  
-  this.modifiedCell.dispatchEvent(event);
+	event.initEvent('change',true,false);  
+	this.modifiedCell.dispatchEvent(event);
 }
 
 Grid.prototype.getEvtErase = function() {
-  this.modifiedCell.value = '';
-  this.modifiedCell.className = 'cell';
-  this.commands.className = 'hidden';
+	this.modifiedCell.value = '';
+	this.modifiedCell.className = 'cell';
+	this.commands.className = 'hidden';
  }
 
-Grid.prototype.getEvtNewGame = function (e) {
-	alert('new game');
+Grid.prototype.getEvtNewGame = function () {
+	this.gameInfos.className = 'displayed center';
+}
+
+Grid.prototype.getEvtStartGame = function () {
+	var level = document.getElementById('level').value;
+	
+	/* Create new game */
+	this.game.newGame(level);
+	
+	/* delete previous grid */
+	var table =  document.getElementById('grid');
+	table.innerHTML = '';
+  
+	/* init new grid */
+	this.initGrid(this.game.baseGrid);
+	
+	this.gameInfos.className = 'hidden';
 }
 
 Grid.prototype.getEvtReset = function () {
-  this.game.resetGame();
+	this.game.resetGame();
   
-  /* delete previous grid */
-  var table =  document.getElementById('grid');
-  table.innerHTML = '';
+	/* delete previous grid */
+	var table =  document.getElementById('grid');
+	table.innerHTML = '';
   
-  /* init new grid */
+	/* init new grid */
 	this.initGrid(this.game.baseGrid);
 }

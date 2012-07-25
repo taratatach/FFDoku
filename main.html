@@ -37,6 +37,17 @@
 		</table>
 		<p><input type="button" id="erase" name="Erase" value="Erase" /></p>
 	</section>
+	<section id="gameInfos">
+		<p>
+			<label for="level">Level</label>
+			<select id="level">
+				<option value="easy">Easy</option>
+				<option value="medium">Medium</option>
+				<option value="hard">Hard</option>
+			</select><br />
+			<input type="button" id="startGame" name="Start Game" value="Start Game" />
+		</p>
+	</section>
     <nav>
     	<ul id="menu">
     		<li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
@@ -47,9 +58,8 @@
     	window.addEventListener('load', init, false);
     	
     	function init() {
-    	  var game = new Game();
-    	  game.newGame('hard');
-    		var grid = new Grid(game);
+			var game = new Game('hard');
+			new Grid(game);
   		}
     </script>
   </body>
