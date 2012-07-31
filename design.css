@@ -26,7 +26,7 @@ input {
 	border:none;
 }
 
-#grid , #commands{
+#grid , #commands, #gameInfos{
 	border-collapse: collapse;
 	margin: auto;
 	border: 2px solid black;
@@ -44,6 +44,10 @@ input {
 
 #commands table {
 	margin: auto;
+}
+
+#gameInfos {
+  padding: 5px;
 }
 
 #menu {
@@ -75,11 +79,12 @@ input {
 .number, .cell {
 	text-align: center;
 	width: 42px;
+	height: 42px;
 }
 
 .number {
 	background-color: yellow;
-	font-weight: bold;
+	font-weight: bold
 }
 
 .wrong {

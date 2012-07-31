@@ -36,24 +36,24 @@ function Game(level) {
  * and the arrays containing the already taken numbers
  */
 Game.prototype.init = function () {
-	this.currGrid = new Array(9);
-	this.baseGrid = new Array(9);
-	this.solvGrid = new Array(9);
+	this.currGrid = [];
+	this.baseGrid = [];
+	this.solvGrid = [];
 	
 	// Numbers not free to use in lines, columns and squares
-	this.linesTaken = new Array(9);
-	this.colsTaken = new Array(9);
-	this.sqrsTaken = new Array(9);
+	this.linesTaken = [];
+	this.colsTaken = [];
+	this.sqrsTaken = [];
 	
 	
 	for (var i=0; i<9; i++) {
-		this.linesTaken[i] = new Array(false, false, false, false, false, false, false, false, false);
-		this.colsTaken[i] = new Array(false, false, false, false, false, false, false, false, false);
-		this.sqrsTaken[i] = new Array(false, false, false, false, false, false, false, false, false);
+		this.linesTaken[i] = [false, false, false, false, false, false, false, false, false];
+		this.colsTaken[i] = [false, false, false, false, false, false, false, false, false];
+		this.sqrsTaken[i] = [false, false, false, false, false, false, false, false, false];
 		
-		this.currGrid[i] = new Array(9);
-		this.baseGrid[i] = new Array(9);
-		this.solvGrid[i] = new Array(9);
+		this.currGrid[i] = [];
+		this.baseGrid[i] = [];
+		this.solvGrid[i] = [];
 	}
 }
 
@@ -105,7 +105,7 @@ Game.prototype.generateGrid = function (nbNumbersLeft) {
 	if (nbNumbersLeft == 0)
 		return true;
 	
-	var possibles = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9).shuffle();
+	var possibles = [1, 2, 3, 4, 5, 6, 7, 8, 9].shuffle();
 	
 	var i = ~~((81 - nbNumbersLeft) / 9);
 	var j = (81 - nbNumbersLeft) % 9;

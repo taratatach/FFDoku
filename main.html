@@ -31,7 +31,7 @@
   </head>
   <body>
     <header>
-      <h1>FFDoku, the B2G Sudoku !</h1>
+      <h1>FFDoku</h1>
     </header>
     <section>
       <table id="grid">
@@ -64,16 +64,25 @@
 				<option value="easy">Easy</option>
 				<option value="medium">Medium</option>
 				<option value="hard">Hard</option>
-			</select><br />
+			</select>
+		</p>
+		<p>
 			<input type="button" id="startGame" name="Start Game" value="Start Game" />
+			<input type="button" id="cancel" name="Cancel" value="Cancel" />
 		</p>
 	</section>
+	<footer>
     <nav>
     	<ul id="menu">
     		<li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
     		<li><input type="button" id="reset" name="Reset" value="Reset" /></li>
     	</ul>
     </nav>
+    <p>
+      Copyright (C) 2012 Erwan Guyader, Antoine Duparay<br />
+      Licence AGPL v3 | <a href="https://github.com/taratatach/FFDoku" id="source">Source</a>
+    </p>
+  </footer>
 	<script type="text/javascript">
     	window.addEventListener('load', init, false);
     	

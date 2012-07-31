@@ -23,6 +23,9 @@
  * http://killdream.github.com/blog/2011/10/understanding-javascript-oop/
  */
 
+/*
+ * Class representing the game interactions
+ */
 function Grid (game) {
  	/* Initialize attributes */ 	
 	this.game = game;
@@ -33,50 +36,53 @@ function Grid (game) {
 	this.gameInfos.className = 'hidden';
  	this.newGame = document.getElementById('newGame');
 	this.startGame = document.getElementById('startGame');
+	this.cancel = document.getElementById('cancel');
  	this.reset = document.getElementById('reset');
  	this.inserts = document.getElementsByClassName('insert');
  	this.erase = document.getElementById('erase');
-  	
-	this.initGrid(this.game.baseGrid);
+  
+  this.initGrid(this.game.baseGrid);
 	
  	this.modifiedCell = null;
 }
 
+/*
+ * Create the grid and fill it with the revealed numbers
+ */
 Grid.prototype.initGrid = function (gameGrid) {
 	var self = this;
 	var table = document.getElementById('grid');
 	
-	this.cells = new Array(9);
-	for (i=0; i<9; i++) {
+	this.cells = [];
+	for (var i=0; i<9; i++) {
 		var tr = document.createElement('tr');
 		table.appendChild(tr);
 		
-		this.cells[i] = new Array(9);
-		for (j=0; j<9; j++) {
+		this.cells[i] = [];
+		for (var j=0; j<9; j++) {
 			var td = document.createElement('td');
-			var input = document.createElement('input');
-			
-			input.type = "text";
-			input.id = String((i+1) + '-' + (j+1));
-			if (gameGrid[i][j] == null)
-				input.className = 'cell';
-			else {
-				input.className = 'number';
-				input.value = gameGrid[i][j];
-				input.setAttribute('disabled', 'disabled');
+			if (!gameGrid[i][j]) {
+			  td.id = String((i+1) + '-' + (j+1));
+				td.className = 'cell';
 			}
-			
-			td.appendChild(input);
+			else {
+				td.className = 'number';
+				td.innerHTML = gameGrid[i][j];
+			}
+
 			tr.appendChild(td);
-			
-			this.cells[i][j] = input;
-		}			
+
+ 			this.cells[i][j] = td;
+		}
 	}
 	
   /* Add events */
  	self.addEvents.call(self);
 }
 
+/*
+ * Add events to every cell and button but also the body itself
+ */
 Grid.prototype.addEvents = function () {
 	var self = this;
 	
@@ -84,10 +90,10 @@ Grid.prototype.addEvents = function () {
 		function(e) {
 			self.getEvtBody.call(self, e);
 		},
-	true);
+	false);
 	
 	var cells = document.getElementsByClassName('cell');
-	for(i=0; i<cells.length; i++) {
+	for(var i=0; i<cells.length; i++) {
 		cells[i].addEventListener('click',
 			function(e) {
 				self.getEvtClickCell.call(self, e);
@@ -101,8 +107,8 @@ Grid.prototype.addEvents = function () {
 	}
 	
 	this.newGame.addEventListener('click',
-		function() {
-			self.getEvtNewGame.call(self);
+		function(e) {
+			self.getEvtNewGame.call(self, e);
 		},
 	false);
 	
@@ -111,14 +117,20 @@ Grid.prototype.addEvents = function () {
 			self.getEvtStartGame.call(self);
 		},
 	false);
-  
+
+  this.cancel.addEventListener('click',
+    function (e) {
+      self.getEvtCancel.call(self, e);
+    },
+  false);
+    
 	this.reset.addEventListener('click',
-		function() {
-			self.getEvtReset.call(self);
+		function(e) {
+			self.getEvtReset.call(self, e);
 		},
 	false);
   
-	for(i=0; i<this.inserts.length; i++)
+	for(var i=0; i<this.inserts.length; i++)
 		this.inserts[i].addEventListener('click',
 			function(e) {
 				self.getEvtInsert.call(self, e);
@@ -126,23 +138,25 @@ Grid.prototype.addEvents = function () {
 		false);
 	
 	this.erase.addEventListener('click',
-	  function() {
-	    self.getEvtErase.call(self);
+	  function(e) {
+	    self.getEvtErase.call(self, e);
 	  },
 	false);
 }
 
+/*
+ * Called when body is clicked but no other event is called before
+ * ( asserted with stopPropagation() )
+ */
 Grid.prototype.getEvtBody = function (e) {
-	if (e.target.nodeName != 'INPUT')
 		this.commands.className = 'hidden';
-	if (e.target.id != 'gameInfos'
-		&& e.target.parentNode.id != 'gameInfos'
-		&& e.target.parentNode.parentNode.id != 'gameInfos'
-		&& e.target.parentNode.parentNode.parentNode.id != 'gameInfos') {
-		this.gameInfos.className = 'hidden';
-	}
 }
 
+/*
+ * Called when a cell is clicked, either with a revealed number or
+ * an editable one.
+ * Change the visibility of the insertion "popup"
+ */
 Grid.prototype.getEvtClickCell = function (e) {
 	this.modifiedCell = e.target;
 	if (this.commands.className == 'hidden') {
@@ -151,13 +165,20 @@ Grid.prototype.getEvtClickCell = function (e) {
 	}
 	else
 		this.commands.className = 'hidden';
+	e.stopPropagation();
 }
 
+/*
+ * Called when the content of an editable cell is changed.
+ * Call the verification method of the Game class to check
+ * if the inserted number is correct or not, changing the
+ * cell's color accordingly.
+ */
 Grid.prototype.getEvtChangeCell = function (e) {
 	this.modifiedCell = e.target;
 
 	// get cell value, cell line and cell column
-	var value = this.modifiedCell.value;
+	var value = this.modifiedCell.innerHTML;
 	var strs = this.modifiedCell.id.split('-');
 	var line = parseInt(strs[0])-1;
 	var col = parseInt(strs[1])-1;
@@ -172,24 +193,51 @@ Grid.prototype.getEvtChangeCell = function (e) {
 		this.modifiedCell.className = 'cell right';
 }
 
+/*
+ * Called when the user clicks on a number in the insertion "popup"
+ */
 Grid.prototype.getEvtInsert = function (e) {
-	this.modifiedCell.value = e.target.innerHTML;
+	this.modifiedCell.innerHTML = e.target.innerHTML;
 	this.commands.className = 'hidden';
 	var event = document.createEvent('HTMLEvents');  
 	event.initEvent('change',true,false);  
 	this.modifiedCell.dispatchEvent(event);
+	e.stopPropagation();
 }
 
-Grid.prototype.getEvtErase = function() {
+/*
+ * Called when the user clicks on the Erase button in the insertion "popup"
+ */
+Grid.prototype.getEvtErase = function(e) {
 	this.modifiedCell.value = '';
 	this.modifiedCell.className = 'cell';
 	this.commands.className = 'hidden';
+	e.stopPropagation();
  }
 
-Grid.prototype.getEvtNewGame = function () {
+/*
+ * Called when the user clicks on the New Game button
+ * Shows the new game "popup"
+ */
+Grid.prototype.getEvtNewGame = function (e) {
 	this.gameInfos.className = 'displayed center';
+	e.stopPropagation();
 }
 
+/*
+ * Called when the user clicks on the Cancel button in the new game "popup"
+ * Hide the new game "popup"
+ */
+Grid.prototype.getEvtCancel = function (e) {
+  this.gameInfos.className = 'hidden';
+	e.stopPropagation();
+}
+
+/*
+ * Called when the user clicks on the Start Game button in the new game "popup"
+ * Hide the new game popup, delete the current grid, create a new game with the
+ * Game class and create a new grid with the new revealed numbers
+ */
 Grid.prototype.getEvtStartGame = function () {
 	var level = document.getElementById('level').value;
 	
@@ -206,7 +254,12 @@ Grid.prototype.getEvtStartGame = function () {
 	this.gameInfos.className = 'hidden';
 }
 
-Grid.prototype.getEvtReset = function () {
+/*
+ * Called when the user clicks on the Reset button
+ * Delete the current grid and create a new one with only the revealed numbers
+ * from the Game class
+ */
+Grid.prototype.getEvtReset = function (e) {
 	this.game.resetGame();
   
 	/* delete previous grid */
@@ -215,4 +268,6 @@ Grid.prototype.getEvtReset = function () {
   
 	/* init new grid */
 	this.initGrid(this.game.baseGrid);
+	
+	e.stopPropagation();
 }
