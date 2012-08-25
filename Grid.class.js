@@ -146,7 +146,7 @@ Grid.prototype.addEvents = function () {
 
 /*
  * Called when body is clicked but no other event is called before
- * ( asserted with stopPropagation() )
+ * ( asserted with stopPropagation() in the other click handlers )
  */
 Grid.prototype.getEvtBody = function (e) {
 		this.commands.className = 'hidden';
@@ -183,14 +183,14 @@ Grid.prototype.getEvtChangeCell = function (e) {
 	var line = parseInt(strs[0])-1;
 	var col = parseInt(strs[1])-1;
 	
-	// insert value in Game.grid
-	this.game.changeValue(value,  line, col);
-	
 	// check if value inserted is correct, otherwise change background to red
 	if (!this.game.respect(value, line, col))
 		this.modifiedCell.className = 'cell wrong';
 	else
 		this.modifiedCell.className = 'cell right';
+		
+  // insert value in Game.grid
+	this.game.changeValue(value,  line, col);
 }
 
 /*
@@ -209,7 +209,15 @@ Grid.prototype.getEvtInsert = function (e) {
  * Called when the user clicks on the Erase button in the insertion "popup"
  */
 Grid.prototype.getEvtErase = function(e) {
-	this.modifiedCell.value = '';
+  // get cell line and cell column
+  var strs = this.modifiedCell.id.split('-');
+	var line = parseInt(strs[0])-1;
+	var col = parseInt(strs[1])-1;
+	
+  // insert null value in Game.grid
+	this.game.changeValue(null,  line, col);
+	
+	this.modifiedCell.innerHTML = '';
 	this.modifiedCell.className = 'cell';
 	this.commands.className = 'hidden';
 	e.stopPropagation();

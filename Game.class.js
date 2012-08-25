@@ -23,9 +23,9 @@
  */
 function Game(level) {
 	this.levels = {
-		'easy' : 25,
-		'medium' : 20,
-		'hard' : 17
+		'easy' : 28,
+		'medium' : 23,
+		'hard' : 20
 	};
 
 	this.newGame(level);
@@ -47,9 +47,9 @@ Game.prototype.init = function () {
 	
 	
 	for (var i=0; i<9; i++) {
-		this.linesTaken[i] = [false, false, false, false, false, false, false, false, false];
-		this.colsTaken[i] = [false, false, false, false, false, false, false, false, false];
-		this.sqrsTaken[i] = [false, false, false, false, false, false, false, false, false];
+		this.linesTaken[i] = [0,0,0,0,0,0,0,0,0];
+		this.colsTaken[i] = [0,0,0,0,0,0,0,0,0];
+		this.sqrsTaken[i] = [0,0,0,0,0,0,0,0,0];
 		
 		this.currGrid[i] = [];
 		this.baseGrid[i] = [];
@@ -72,7 +72,15 @@ Game.prototype.newGame = function (level) {
  * Puts that value into the current grid
  */
 Game.prototype.changeValue = function(nb, l, c) {
-	this.currGrid[l][c] = nb;
+  if (nb) {
+  	this.currGrid[l][c] = nb;
+	  this.setTaken(nb, l, c);
+	}
+	else {
+	  var oNb = this.currGrid[l][c];
+	  this.currGrid[l][c] = null;
+	  this.setFree(oNb, l, c);
+	}
 }
 
 /*
@@ -151,14 +159,14 @@ Game.prototype.generateRevealed = function(nbNumbers) {
  */
 Game.prototype.setTaken = function (nb, l, c) {
 	/* Set the number as present in the line */
-	this.linesTaken[l][nb-1] = true;
+	this.linesTaken[l][nb-1]++;
 	
 	/* Set the number as present in the column */
-	this.colsTaken[c][nb-1] = true;
+	this.colsTaken[c][nb-1]++;
 	
 	/* Set the number as present in the 3*3 square */
 	var sqr = ~~(l / 3) * 3 + ~~(c / 3);
-	this.sqrsTaken[sqr][nb-1] = true;
+	this.sqrsTaken[sqr][nb-1]++;
 }
 
 /*
@@ -167,12 +175,12 @@ Game.prototype.setTaken = function (nb, l, c) {
  */
 Game.prototype.setFree = function (nb, l, c) {
 	/* Set the number as not present in the line */
-	this.linesTaken[l][nb-1] = false;
+	this.linesTaken[l][nb-1]--;
 	
 	/* Set the number as not present in the column */
-	this.colsTaken[c][nb-1] = false;
+	this.colsTaken[c][nb-1]--;
 	
 	/* Set the number as not present in the 3*3 square */
 	var sqr = ~~(l / 3) * 3 + ~~(c / 3);
-	this.sqrsTaken[sqr][nb-1] = false;
+	this.sqrsTaken[sqr][nb-1]--;
 }
