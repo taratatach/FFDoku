@@ -38,16 +38,32 @@ input {
 	border: 1px solid black;
 }
 
-#commands, #gameInfos {
+#commands {
 	background-color: white;
+	width: 150px;
+	height: 150px;
 }
 
 #commands table {
 	margin: auto;
+	margin-top: 5px;
+	width: 100%;
+}
+
+#commands table td {
+        padding: 3px;
+	padding-top: 6px;
+}
+
+#erase {
+        height: 25px;
+	margin-bottom: 5px;
 }
 
 #gameInfos {
-  padding: 5px;
+        padding: 5px;
+	background-color: white;
+	height: 100px;
 }
 
 #menu {
