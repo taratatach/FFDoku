@@ -143,7 +143,7 @@ Game.prototype.generateRevealed = function(nbNumbers) {
 		do {
 			var i = ~~(Math.random() * 9);
 			var j = ~~(Math.random() * 9);
-		} while (this.baseGrid[i][j]);
+		} while (this.baseGrid[i][j] || this.countTakenLine(i) > 4 || this.countTakenCol(j) > 4 || this.countTakenSqr(i, j) > 3);
 		
 		this.baseGrid[i][j] = this.solvGrid[i][j];
 	}
@@ -183,4 +183,34 @@ Game.prototype.setFree = function (nb, l, c) {
 	/* Set the number as not present in the 3*3 square */
 	var sqr = ~~(l / 3) * 3 + ~~(c / 3);
 	this.sqrsTaken[sqr][nb-1]--;
+}
+
+Game.prototype.countTakenLine = function (l) {
+  var n = 0;
+  
+  for (var i = 0; i < 9; i++)
+    n += (this.baseGrid[l][i] ? 1 : 0);
+  
+  return n;
+}
+
+Game.prototype.countTakenCol = function (c) {
+  var n = 0;
+  
+  for (var i = 0; i < 9; i++)
+    n += (this.baseGrid[i][c] ? 1 : 0);
+  
+  return n;
+}
+
+Game.prototype.countTakenSqr = function (l, c) {
+  var n = 0;
+  var bl = ~~(l / 3) * 3;
+  var bc = ~~(c / 3);
+  
+  for (var i = bl; i < bl + 3; i++)
+    for (var j = bc; j < bc + 3; j++)
+      n += (this.baseGrid[i][j] ? 1 : 0);
+  
+  return n;
 }
