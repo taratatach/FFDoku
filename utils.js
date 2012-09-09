@@ -27,3 +27,22 @@ Array.prototype.shuffle = function() {
 		this.push(s.pop());
 	return this;
 }
+
+/* To add a class to a node */
+function addClass(node, className) {
+  node.className += " " + className;
+}
+
+/* To remove a class from a node */
+function removeClass(node, className) {
+  var classes = node.className.split(" ");
+  var i = 0;
+  
+  while (i < classes.length && classes[i] != className)
+    i++;
+  
+  if (i < classes.length)
+    classes.splice(i, 1);
+    
+  node.className = classes.join(" ");
+}

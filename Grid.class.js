@@ -61,6 +61,7 @@ Grid.prototype.initGrid = function (gameGrid) {
 		this.cells[i] = [];
 		for (var j=0; j<9; j++) {
 			var td = document.createElement('td');
+
 			if (!gameGrid[i][j]) {
 			  td.id = String((i+1) + '-' + (j+1));
 				td.className = 'cell';
@@ -70,6 +71,15 @@ Grid.prototype.initGrid = function (gameGrid) {
 				td.innerHTML = gameGrid[i][j];
 			}
 
+      if (i % 3 == 2)
+        addClass(td, 'borderBottom');
+      if (i % 3 == 0)
+        addClass(td, 'borderTop');
+      if (j % 3 == 2)
+        addClass(td, 'borderRight');
+      if (j % 3 == 0)
+        addClass(td, 'borderLeft');
+      
 			tr.appendChild(td);
 
  			this.cells[i][j] = td;
@@ -184,10 +194,14 @@ Grid.prototype.getEvtChangeCell = function (e) {
 	var col = parseInt(strs[1])-1;
 	
 	// check if value inserted is correct, otherwise change background to red
-	if (!this.game.respect(value, line, col))
-		this.modifiedCell.className = 'cell wrong';
-	else
-		this.modifiedCell.className = 'cell right';
+	if (!this.game.respect(value, line, col)) {
+	  removeClass(this.modifiedCell, 'right');
+		addClass(this.modifiedCell, 'wrong');
+	}
+	else {
+		removeClass(this.modifiedCell, 'wrong');
+		addClass(this.modifiedCell, 'right');
+	}
 		
   // insert value in Game.grid
 	this.game.changeValue(value,  line, col);
@@ -218,7 +232,8 @@ Grid.prototype.getEvtErase = function(e) {
 	this.game.changeValue(null,  line, col);
 	
 	this.modifiedCell.innerHTML = '';
-	this.modifiedCell.className = 'cell';
+	removeClass(this.modifiedCell, 'right');
+	removeClass(this.modifiedCell, 'wrong');
 	this.commands.className = 'hidden';
 	e.stopPropagation();
  }

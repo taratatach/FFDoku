@@ -185,6 +185,9 @@ Game.prototype.setFree = function (nb, l, c) {
 	this.sqrsTaken[sqr][nb-1]--;
 }
 
+/*
+ * Returns the number of numbers already revealed in the given line
+ */
 Game.prototype.countTakenLine = function (l) {
   var n = 0;
   
@@ -194,6 +197,9 @@ Game.prototype.countTakenLine = function (l) {
   return n;
 }
 
+/*
+ * Returns the number of numbers already revealed in the given column
+ */
 Game.prototype.countTakenCol = function (c) {
   var n = 0;
   
@@ -203,6 +209,9 @@ Game.prototype.countTakenCol = function (c) {
   return n;
 }
 
+/*
+ * Returns the number of numbers already revealed in the given square
+ */
 Game.prototype.countTakenSqr = function (l, c) {
   var n = 0;
   var bl = ~~(l / 3) * 3;

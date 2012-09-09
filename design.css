@@ -38,6 +38,15 @@ input {
 	border: 1px solid black;
 }
 
+#grid td.borderRight {
+  border-right: 2px solid black;
+}
+
+
+#grid td.borderBottom {
+  border-bottom: 2px solid black;
+}
+
 #commands {
 	background-color: white;
 	width: 150px;
@@ -45,23 +54,24 @@ input {
 }
 
 #commands table {
+  border-collapse: collapse;
 	margin: auto;
-	margin-top: 5px;
 	width: 100%;
 }
 
 #commands table td {
-        padding: 3px;
+  border: 1px solid black;
+  padding: 3px;
 	padding-top: 6px;
 }
 
 #erase {
-        height: 25px;
+  height: 25px;
 	margin-bottom: 5px;
 }
 
 #gameInfos {
-        padding: 5px;
+  padding: 5px;
 	background-color: white;
 	height: 100px;
 }
