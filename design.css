@@ -1,6 +1,6 @@
 /*
     FFDoku is a Sudoku game primarily designed for the Firefox OS
-    Copyright (C) 2012 Erwan GUYADER <erwanguyader@mailoo.org>, Antoine DUPARAY <antoineduparay@gmail.com>
+    Copyright (C) 2012 Erwan GUYADER <erwanguyader@mailoo.org>, Antoine DUPARAY <flaburgan@geexxx.fr>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -20,13 +20,29 @@
 body {
 	text-align: center;
 	font-family: Ubuntu;
+	font-size: large;
 }
 
 input {
-	border:none;
+	border: none;
+	min-width: 150px;
+	margin: 5px;
+	padding: 5px;
 }
 
-#grid , #commands, #gameInfos{
+header h1 {
+	margin-bottom: 0px;
+}
+
+header h2 {
+	font-size: medium;
+	font-style: italic;
+	margin-top: 0px;
+}
+
+/* ------ La grille ----- */
+
+#grid, #commands, #gameInfos {
 	border-collapse: collapse;
 	margin: auto;
 	border: 2px solid black;
@@ -39,39 +55,36 @@ input {
 }
 
 #grid td.borderRight {
-  border-right: 2px solid black;
+	border-right: 2px solid black;
 }
 
 
 #grid td.borderBottom {
-  border-bottom: 2px solid black;
+	border-bottom: 2px solid black;
 }
+
+/* ------ Le panneau de commandes ----- */
 
 #commands {
 	background-color: white;
-	width: 150px;
-	height: 150px;
+	width: 200px;
 }
 
 #commands table {
-  border-collapse: collapse;
-	margin: auto;
+	border-collapse: collapse;
 	width: 100%;
 }
 
 #commands table td {
-  border: 1px solid black;
-  padding: 3px;
+	border: 1px solid black;
+	padding: 3px;
 	padding-top: 6px;
 }
 
-#erase {
-  height: 25px;
-	margin-bottom: 5px;
-}
+/* ------ Le menu nouveau jeu / fin jeu ----- */
 
 #gameInfos {
-  padding: 5px;
+	padding: 5px;
 	background-color: white;
 	height: 100px;
 }
@@ -83,10 +96,6 @@ input {
 
 #menu li {
 	display: inline;
-}
-
-#menu input {
-	width: 120px;
 }
 
 .hidden {
@@ -108,8 +117,9 @@ input {
 	height: 42px;
 }
 
+/* Les cases pré remplies */
 .number {
-	background-color: yellow;
+	background-color: #BBBBBB;
 	font-weight: bold
 }
 
@@ -118,7 +128,7 @@ input {
 }
 
 .right {
-	background-color: green;
+	/* background-color: green; */
 }
 
 /* Positions des cases pour placer le menu des chiffres au dessus */
