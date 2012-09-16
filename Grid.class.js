@@ -191,15 +191,18 @@ Grid.prototype.getEvtBody = function (e) {
  * Change the visibility of the insertion "popup"
  */
 Grid.prototype.getEvtClickCell = function (e) {
-	this.modifiedCell = e.target;
-	if (this.commands.className == 'hidden') {
-		var strs = this.modifiedCell.id.split('-');
-		//this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
-		this.commands.className = 'displayed';
+    if (this.gameInfos.className == 'hidden'
+        && this.about.className == 'hidden') {
+	    this.modifiedCell = e.target;
+	    if (this.commands.className == 'hidden') {
+		    var strs = this.modifiedCell.id.split('-');
+		    //this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
+		    this.commands.className = 'displayed';
+	    }
+	    else
+		    this.commands.className = 'hidden';
+	    e.stopPropagation();
 	}
-	else
-		this.commands.className = 'hidden';
-	e.stopPropagation();
 }
 
 /*
@@ -235,12 +238,12 @@ Grid.prototype.getEvtChangeCell = function (e) {
  * Called when the user clicks on a number in the insertion "popup"
  */
 Grid.prototype.getEvtInsert = function (e) {
-	this.modifiedCell.innerHTML = e.target.innerHTML;
-	this.commands.className = 'hidden';
-	var event = document.createEvent('HTMLEvents');  
-	event.initEvent('change',true,false);  
-	this.modifiedCell.dispatchEvent(event);
-	e.stopPropagation();
+    this.modifiedCell.innerHTML = e.target.innerHTML;
+    this.commands.className = 'hidden';
+    var event = document.createEvent('HTMLEvents');  
+    event.initEvent('change',true,false);  
+    this.modifiedCell.dispatchEvent(event);
+    e.stopPropagation();
 }
 
 /*
@@ -267,8 +270,10 @@ Grid.prototype.getEvtErase = function(e) {
  * Shows the new game "popup"
  */
 Grid.prototype.getEvtNewGame = function (e) {
-	this.gameInfos.className = 'displayed';
-	e.stopPropagation();
+    if (this.commands.className == 'hidden' && this.about.className == 'hidden') {
+    	this.gameInfos.className = 'displayed';
+	    e.stopPropagation();
+	}
 }
 
 /*
@@ -276,8 +281,10 @@ Grid.prototype.getEvtNewGame = function (e) {
  * Shows the about "popup"
  */
 Grid.prototype.getEvtAbout = function (e) {
-	this.about.className = 'displayed';
-	e.stopPropagation();
+    if (this.commands.className == 'hidden' && this.gameInfos.className == 'hidden') {
+	    this.about.className = 'displayed';
+	    e.stopPropagation();
+	}
 }
 
 /*
@@ -325,14 +332,18 @@ Grid.prototype.getEvtStartGame = function () {
  * from the Game class
  */
 Grid.prototype.getEvtReset = function (e) {
-	this.game.resetGame();
-  
-	/* delete previous grid */
-	var table =  document.getElementById('grid');
-	table.innerHTML = '';
-  
-	/* init new grid */
-	this.initGrid(this.game.baseGrid);
+    if (this.commands.className == 'hidden' 
+        && this.gameInfos.className == 'hidden'
+        && this.about.className == 'hidden') {
+	    this.game.resetGame();
+      
+	    /* delete previous grid */
+	    var table =  document.getElementById('grid');
+	    table.innerHTML = '';
+      
+	    /* init new grid */
+	    this.initGrid(this.game.baseGrid);
 	
-	e.stopPropagation();
+	    e.stopPropagation();
+	}
 }
