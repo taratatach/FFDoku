@@ -25,7 +25,7 @@ body {
 
 input {
 	border: none;
-	min-width: 150px;
+	min-width: 100px;
 	margin: 5px;
 	padding: 5px;
 }
@@ -42,9 +42,10 @@ header h2 {
 
 /* ------ La grille ----- */
 
-#grid, #commands, #gameInfos {
+#grid, #commands, #gameInfos, #about {
 	border-collapse: collapse;
-	margin: auto;
+	margin-left: auto;
+	margin-right: auto;
 	border: 2px solid black;
 }
 
@@ -68,6 +69,7 @@ header h2 {
 #commands {
 	background-color: white;
 	width: 200px;
+	height: 200px;
 }
 
 #commands table {
@@ -81,12 +83,22 @@ header h2 {
 	padding-top: 6px;
 }
 
+#commands.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -100px;
+    z-index: 1;
+}
+
 /* ------ Le menu nouveau jeu / fin jeu ----- */
 
 #gameInfos {
 	padding: 5px;
 	background-color: white;
 	height: 100px;
+	width: 230px;
 }
 
 #menu {
@@ -98,17 +110,44 @@ header h2 {
 	display: inline;
 }
 
+#gameInfos.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -115px;
+    z-index: 1;
+}
+
+/* ------ Panneau d'affichage du about ------ */
+
+#about {
+    padding: 5px;
+    background-color: white;
+    height: 130px;
+    width: 230px;
+}
+
+#about.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -65px;
+    margin-left: -115px;
+    z-index: 1;
+}
+
+/* ------------------------------------------ */
+
 .hidden {
 	display: none;
 }
 
 .displayed {
-	position: relative;
+	position: absolute;
 	display: inline-block;
-}
-
-.center {
-	top: -244px;
+	vertical-align: middle;
+	z-index: 1;
 }
 
 .number, .cell {
@@ -127,12 +166,12 @@ header h2 {
 	background-color: red;
 }
 
-.right {
-	/* background-color: green; */
-}
+/*.right {
+	background-color: green;
+}*/
 
 /* Positions des cases pour placer le menu des chiffres au dessus */
-.line_1 {
+/*.line_1 {
 	top: -420px;
 }
 .line_2 {
@@ -186,4 +225,4 @@ header h2 {
 }
 .col_9 {
 	left: 176px;
-}
+}*/

@@ -82,7 +82,6 @@ Game.prototype.changeValue = function(nb, l, c) {
 	    this.setFree(this.currGrid[l][c], l, c);
 	    this.currGrid[l][c] = null;
 	}
-	console.log(this.linesTaken);
 }
 
 /*
@@ -102,15 +101,6 @@ Game.prototype.respect = function (nb, l, c) {
  * Just copies back the base grid into the current grid
  */
 Game.prototype.resetGame = function () {
-    /*console.log("\n");
-    console.log("Avant :");
-    console.log("L :");
-    console.log(this.linesTaken);
-    console.log("C :");
-    console.log(this.colsTaken);
-    console.log("S :");
-    console.log(this.sqrsTaken);*/
-    
 	this.currGrid = this.baseGrid.map(function(l){
 	    return l.slice(0, 9);
 	});
@@ -125,14 +115,6 @@ Game.prototype.resetGame = function () {
 	    for (var j = 0; j < 9; j++)
 	        if (this.baseGrid[i][j])
 	            this.setTaken(this.baseGrid[i][j], i, j);
-	            
-    console.log("Après :");
-    console.log("L :");
-    console.log(this.linesTaken);
-    console.log("C :");
-    console.log(this.colsTaken);
-    console.log("S :");
-    console.log(this.sqrsTaken);
 }
 
 /*

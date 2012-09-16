@@ -34,10 +34,14 @@ function Grid (game) {
  	this.commands.className = 'hidden';
 	this.gameInfos = document.getElementById('gameInfos');
 	this.gameInfos.className = 'hidden';
+	this.about = document.getElementById('about');
+	this.about.className = 'hidden';
  	this.newGame = document.getElementById('newGame');
 	this.startGame = document.getElementById('startGame');
 	this.cancel = document.getElementById('cancel');
  	this.reset = document.getElementById('reset');
+ 	this.dispAbout = document.getElementById('dispAbout');
+ 	this.cancelAbout = document.getElementById('cancelAbout');
  	this.inserts = document.getElementsByClassName('insert');
  	this.erase = document.getElementById('erase');
   
@@ -147,6 +151,18 @@ Grid.prototype.addEvents = function () {
 		},
 	false);
   
+    this.dispAbout.addEventListener('click',
+		function(e) {
+			self.getEvtAbout.call(self, e);
+		},
+	false);
+	
+	this.cancelAbout.addEventListener('click',
+        function (e) {
+            self.getEvtCancelAbout.call(self, e);
+        },
+    false);
+	
 	for(var i=0; i<this.inserts.length; i++)
 		this.inserts[i].addEventListener('click',
 			function(e) {
@@ -178,7 +194,8 @@ Grid.prototype.getEvtClickCell = function (e) {
 	this.modifiedCell = e.target;
 	if (this.commands.className == 'hidden') {
 		var strs = this.modifiedCell.id.split('-');
-		this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
+		//this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
+		this.commands.className = 'displayed';
 	}
 	else
 		this.commands.className = 'hidden';
@@ -250,7 +267,25 @@ Grid.prototype.getEvtErase = function(e) {
  * Shows the new game "popup"
  */
 Grid.prototype.getEvtNewGame = function (e) {
-	this.gameInfos.className = 'displayed center';
+	this.gameInfos.className = 'displayed';
+	e.stopPropagation();
+}
+
+/*
+ * Called when the user clicks on the About button
+ * Shows the about "popup"
+ */
+Grid.prototype.getEvtAbout = function (e) {
+	this.about.className = 'displayed';
+	e.stopPropagation();
+}
+
+/*
+ * Called when the user clicks on the Cancel button in the about "popup"
+ * Hide the about "popup"
+ */
+Grid.prototype.getEvtCancelAbout = function (e) {
+    this.about.className = 'hidden';
 	e.stopPropagation();
 }
 
