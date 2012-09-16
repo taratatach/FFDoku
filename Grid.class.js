@@ -41,7 +41,7 @@ function Grid (game) {
 	this.cancel = document.getElementById('cancel');
  	this.reset = document.getElementById('reset');
  	this.dispAbout = document.getElementById('dispAbout');
- 	this.cancelAbout = document.getElementById('cancelAbout');
+ 	this.ok = document.getElementById('ok');
  	this.inserts = document.getElementsByClassName('insert');
  	this.erase = document.getElementById('erase');
   
@@ -157,7 +157,7 @@ Grid.prototype.addEvents = function () {
 		},
 	false);
 	
-	this.cancelAbout.addEventListener('click',
+	this.ok.addEventListener('click',
         function (e) {
             self.getEvtCancelAbout.call(self, e);
         },
