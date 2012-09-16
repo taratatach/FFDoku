@@ -37,6 +37,14 @@ input {
 	padding: 5px;
 }
 
+input:active {
+    border: 1px solid black;
+}
+
+input.text {
+    font-weight: bold;
+}
+
 header h1 {
 	margin-bottom: 0px;
 }
