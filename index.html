@@ -33,6 +33,15 @@
 			<h1>FFDoku</h1>
 			<h2>A Sudoku game for Firefox OS</h2>
 		</header>
+		<footer>
+		    <nav>
+			    <ul id="menu">
+				    <li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
+				    <li><input type="button" id="reset" name="Reset" value="Reset" /></li>
+				    <li><input type="button" id="dispAbout" name="About" value="About" /></li>
+			    </ul>
+		    </nav>
+	    </footer>
 		<div id="content">
 		    <section>
 			    <table id="grid">
@@ -79,16 +88,6 @@
 				    <input type="button" id="cancelAbout" name="Cancel" value="Cancel" />
 			    </p>
 		    </section>
-		    <div id="floater"></div>
-		    <footer>
-			    <nav>
-				    <ul id="menu">
-					    <li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
-					    <li><input type="button" id="reset" name="Reset" value="Reset" /></li>
-					    <li><input type="button" id="dispAbout" name="About" value="About" /></li>
-				    </ul>
-			    </nav>
-		    </footer>
 		</div>
 		<script type="text/javascript">
 			window.addEventListener('load', init, false);

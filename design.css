@@ -17,7 +17,14 @@
 
 
 */
+
+html {
+    height: 100%;
+}
+
 body {
+    height: 90%;
+    width: 95%;
 	text-align: center;
 	font-family: Ubuntu;
 	font-size: large;
@@ -25,8 +32,8 @@ body {
 
 input {
 	border: none;
-	min-width: 100px;
-	margin: 5px;
+	min-width: 90px;
+	margin: 3px;
 	padding: 5px;
 }
 
@@ -40,17 +47,19 @@ header h2 {
 	margin-top: 0px;
 }
 
+footer {
+    height: 40px;
+}
+
 #content {
     position: relative;
     text-align: center;
+    height: 75%;
     max-width: 360px;
+    max-height: 360px;
+    margin-top: 2%;
     margin-left: auto;
     margin-right: auto;
-}
-
-footer {
-    position: relative;
-    bottom: 0;
 }
 
 #grid, #commands, #gameInfos, #about {
@@ -62,11 +71,11 @@ footer {
 
 #grid {
     position: absolute;
+    height: 100%
 }
 
 #grid td {
 	width: 42px;
-	height: 42px;
 	border: 1px solid black;
 }
 
@@ -81,8 +90,8 @@ footer {
 
 .number, .cell {
 	text-align: center;
-	width: 42px;
-	height: 42px;
+	/*width: 42px;
+	height: 42px;*/
 }
 
 /* Les cases pré remplies */
@@ -100,7 +109,6 @@ footer {
 #commands {
 	background-color: white;
 	width: 200px;
-	height: 200px;
 }
 
 #commands table {
@@ -137,7 +145,6 @@ footer {
 #about {
     padding: 5px;
     background-color: white;
-    height: 130px;
     width: 230px;
 }
 
@@ -148,8 +155,9 @@ footer {
 }
 
 .displayed {
-    position: absolute;
+    position: relative;
 	display: inline-block;
 	vertical-align: middle;
+	top: 25%;
 	z-index: 1;
 }
