@@ -195,15 +195,15 @@ Grid.prototype.getEvtChangeCell = function (e) {
 	
 	// check if value inserted is correct, otherwise change background to red
 	if (!this.game.respect(value, line, col)) {
-	  removeClass(this.modifiedCell, 'right');
+	  //removeClass(this.modifiedCell, 'right');
 		addClass(this.modifiedCell, 'wrong');
 	}
 	else {
 		removeClass(this.modifiedCell, 'wrong');
-		addClass(this.modifiedCell, 'right');
+		//addClass(this.modifiedCell, 'right');
 	}
 		
-  // insert value in Game.grid
+    // insert value in Game.grid
 	this.game.changeValue(value,  line, col);
 }
 
@@ -223,16 +223,16 @@ Grid.prototype.getEvtInsert = function (e) {
  * Called when the user clicks on the Erase button in the insertion "popup"
  */
 Grid.prototype.getEvtErase = function(e) {
-  // get cell line and cell column
-  var strs = this.modifiedCell.id.split('-');
+    // get cell line and cell column
+    var strs = this.modifiedCell.id.split('-');
 	var line = parseInt(strs[0])-1;
 	var col = parseInt(strs[1])-1;
 	
-  // insert null value in Game.grid
+    // insert null value in Game.grid
 	this.game.changeValue(null,  line, col);
 	
 	this.modifiedCell.innerHTML = '';
-	removeClass(this.modifiedCell, 'right');
+	//removeClass(this.modifiedCell, 'right');
 	removeClass(this.modifiedCell, 'wrong');
 	this.commands.className = 'hidden';
 	e.stopPropagation();

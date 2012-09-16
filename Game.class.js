@@ -64,7 +64,7 @@ Game.prototype.newGame = function (level) {
 	this.init();
 	this.generateGrid(81);
 	this.generateRevealed(this.levels[level]);
-	this.currGrid = eval(uneval(this.baseGrid));
+	this.currGrid = this.baseGrid.map(Array.splice, [0, 9]);
 }
 
 /*
@@ -72,14 +72,15 @@ Game.prototype.newGame = function (level) {
  * Puts that value into the current grid
  */
 Game.prototype.changeValue = function(nb, l, c) {
-  if (nb) {
-  	this.currGrid[l][c] = nb;
-	  this.setTaken(nb, l, c);
+    if (nb) {
+        if (this.currGrid[l][c])
+            this.setFree(this.currGrid[l][c], l, c);
+      	this.currGrid[l][c] = nb;
+    	this.setTaken(nb, l, c);
 	}
 	else {
-	  var oNb = this.currGrid[l][c];
-	  this.currGrid[l][c] = null;
-	  this.setFree(oNb, l, c);
+	    this.setFree(this.currGrid[l][c], l, c);
+	    this.currGrid[l][c] = null;
 	}
 }
 
@@ -100,7 +101,37 @@ Game.prototype.respect = function (nb, l, c) {
  * Just copies back the base grid into the current grid
  */
 Game.prototype.resetGame = function () {
-	this.currGrid = eval(uneval(this.baseGrid));
+    console.log("\n");
+    console.log("Avant :");
+    console.log("L :");
+    console.log(this.linesTaken);
+    /*console.log("C :");
+    console.log(this.colsTaken);
+    console.log("S :");
+    console.log(this.sqrsTaken);*/
+        
+	this.currGrid = this.baseGrid.map(function(l){
+	    return l.slice(0, 9);
+	});
+
+	for (var i=0; i<9; i++) {
+		this.linesTaken[i] = [0,0,0,0,0,0,0,0,0];
+		this.colsTaken[i] = [0,0,0,0,0,0,0,0,0];
+		this.sqrsTaken[i] = [0,0,0,0,0,0,0,0,0];
+	}
+	
+	for (var i = 0; i < 9; i++)
+	    for (var j = 0; j < 9; j++)
+	        if (this.baseGrid[i][j])
+	            this.setTaken(this.baseGrid[i][j], i, j);
+
+    console.log("Après :");
+    console.log("L :");
+    console.log(this.linesTaken);
+    /*console.log("C :");
+    console.log(this.colsTaken);
+    console.log("S :");
+    console.log(this.sqrsTaken);*/
 }
 
 /*

@@ -30,7 +30,14 @@ Array.prototype.shuffle = function() {
 
 /* To add a class to a node */
 function addClass(node, className) {
-  node.className += " " + className;
+    var classes = node.className.split(" ");
+    var i = 0;
+  
+    while (i < classes.length && classes[i] != className)
+        i++;
+  
+    if (i >= classes.length)
+        node.className += " " + className;
 }
 
 /* To remove a class from a node */
