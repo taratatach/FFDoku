@@ -40,13 +40,28 @@ header h2 {
 	margin-top: 0px;
 }
 
-/* ------ La grille ----- */
+#content {
+    position: relative;
+    text-align: center;
+    max-width: 360px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+}
 
 #grid, #commands, #gameInfos, #about {
 	border-collapse: collapse;
-	margin-left: auto;
-	margin-right: auto;
 	border: 2px solid black;
+}
+
+/* ------ La grille ----- */
+
+#grid {
+    position: absolute;
 }
 
 #grid td {
@@ -62,6 +77,22 @@ header h2 {
 
 #grid td.borderBottom {
 	border-bottom: 2px solid black;
+}
+
+.number, .cell {
+	text-align: center;
+	width: 42px;
+	height: 42px;
+}
+
+/* Les cases pré remplies */
+.number {
+	background-color: #BBBBBB;
+	font-weight: bold
+}
+
+.wrong {
+	background-color: red;
 }
 
 /* ------ Le panneau de commandes ----- */
@@ -83,15 +114,6 @@ header h2 {
 	padding-top: 6px;
 }
 
-#commands.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
-    z-index: 1;
-}
-
 /* ------ Le menu nouveau jeu / fin jeu ----- */
 
 #gameInfos {
@@ -110,15 +132,6 @@ header h2 {
 	display: inline;
 }
 
-#gameInfos.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -50px;
-    margin-left: -115px;
-    z-index: 1;
-}
-
 /* ------ Panneau d'affichage du about ------ */
 
 #about {
@@ -128,15 +141,6 @@ header h2 {
     width: 230px;
 }
 
-#about.centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -65px;
-    margin-left: -115px;
-    z-index: 1;
-}
-
 /* ------------------------------------------ */
 
 .hidden {
@@ -144,85 +148,8 @@ header h2 {
 }
 
 .displayed {
-	position: absolute;
+    position: absolute;
 	display: inline-block;
 	vertical-align: middle;
 	z-index: 1;
 }
-
-.number, .cell {
-	text-align: center;
-	width: 42px;
-	height: 42px;
-}
-
-/* Les cases pré remplies */
-.number {
-	background-color: #BBBBBB;
-	font-weight: bold
-}
-
-.wrong {
-	background-color: red;
-}
-
-/*.right {
-	background-color: green;
-}*/
-
-/* Positions des cases pour placer le menu des chiffres au dessus */
-/*.line_1 {
-	top: -420px;
-}
-.line_2 {
-	top: -376px;
-}
-.line_3 {
-	top: -332px;
-}
-.line_4 {
-	top: -288px;
-}
-.line_5 {
-	top: -244px;
-}
-.line_6 {
-	top: -200px;
-}
-.line_7 {
-	top: -156px;
-}
-.line_8 {
-	top: -112px;
-}
-.line_9 {
-	top: -78px;
-}
-
-.col_1 {
-	left: -176px;
-}
-.col_2 {
-	left: -132px;
-}
-.col_3 {
-	left: -88px;
-}
-.col_4 {
-	left: -44px;
-}
-.col_5 {
-	left: 0px;
-}
-.col_6 {
-	left: 44px;
-}
-.col_7 {
-	left: 88px;
-}
-.col_8 {
-	left: 132px;
-}
-.col_9 {
-	left: 176px;
-}*/
