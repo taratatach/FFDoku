@@ -92,14 +92,18 @@ footer {
 
 .number, .cell {
 	text-align: center;
-	/*width: 42px;
-	height: 42px;*/
 }
 
 /* Les cases pré remplies */
 .number {
 	background-color: #BBBBBB;
 	font-weight: bold
+}
+
+.selected {
+    box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+    -webkit-box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+    -moz-box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
 }
 
 .wrong {

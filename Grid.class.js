@@ -193,10 +193,14 @@ Grid.prototype.getEvtBody = function (e) {
 Grid.prototype.getEvtClickCell = function (e) {
     if (this.gameInfos.className == 'hidden'
         && this.about.className == 'hidden') {
-	    this.modifiedCell = e.target;
 	    if (this.commands.className == 'hidden') {
+	        if (this.modifiedCell)
+                removeClass(this.modifiedCell, 'selected');
+                
+            this.modifiedCell = e.target;
+            addClass(this.modifiedCell, 'selected');
+            
 		    var strs = this.modifiedCell.id.split('-');
-		    //this.commands.className = 'displayed line_' + strs[0] + ' col_' + strs[1];
 		    this.commands.className = 'displayed';
 	    }
 	    else
