@@ -41,8 +41,8 @@ function Grid (game) {
  	this.inserts = document.getElementsByClassName('insert');
  	this.erase = document.getElementById('erase');
   
-  this.initGrid(this.game.baseGrid);
-	
+    this.initGrid(this.game.baseGrid);
+	this.addEvents();
  	this.modifiedCell = null;
 }
 
@@ -63,7 +63,7 @@ Grid.prototype.initGrid = function (gameGrid) {
 			var td = document.createElement('td');
 
 			if (!gameGrid[i][j]) {
-			  td.id = String((i+1) + '-' + (j+1));
+			    td.id = String((i+1) + '-' + (j+1));
 				td.className = 'cell';
 			}
 			else {
@@ -71,14 +71,14 @@ Grid.prototype.initGrid = function (gameGrid) {
 				td.innerHTML = gameGrid[i][j];
 			}
 
-      if (i % 3 == 2)
-        addClass(td, 'borderBottom');
-      if (i % 3 == 0)
-        addClass(td, 'borderTop');
-      if (j % 3 == 2)
-        addClass(td, 'borderRight');
-      if (j % 3 == 0)
-        addClass(td, 'borderLeft');
+            if (i % 3 == 2)
+                addClass(td, 'borderBottom');
+            if (i % 3 == 0)
+                addClass(td, 'borderTop');
+            if (j % 3 == 2)
+                addClass(td, 'borderRight');
+            if (j % 3 == 0)
+                addClass(td, 'borderLeft');
       
 			tr.appendChild(td);
 
@@ -86,23 +86,17 @@ Grid.prototype.initGrid = function (gameGrid) {
 		}
 	}
 	
-  /* Add events */
- 	self.addEvents.call(self);
+    /* Add events */
+ 	self.addCellEvents.call(self);
 }
 
 /*
- * Add events to every cell and button but also the body itself
+ * Add events to every cell
  */
-Grid.prototype.addEvents = function () {
-	var self = this;
-	
-	document.addEventListener('click', 
-		function(e) {
-			self.getEvtBody.call(self, e);
-		},
-	false);
-	
-	var cells = document.getElementsByClassName('cell');
+Grid.prototype.addCellEvents = function () {
+    var self = this;
+    
+    var cells = document.getElementsByClassName('cell');
 	for(var i=0; i<cells.length; i++) {
 		cells[i].addEventListener('click',
 			function(e) {
@@ -115,6 +109,19 @@ Grid.prototype.addEvents = function () {
 			},
 		false);
 	}
+}
+
+/*
+ * Add events to every button but also the body itself
+ */
+Grid.prototype.addEvents = function () {
+	var self = this;
+	
+	document.addEventListener('click', 
+		function(e) {
+			self.getEvtBody.call(self, e);
+		},
+	false);
 	
 	this.newGame.addEventListener('click',
 		function(e) {
@@ -128,11 +135,11 @@ Grid.prototype.addEvents = function () {
 		},
 	false);
 
-  this.cancel.addEventListener('click',
-    function (e) {
-      self.getEvtCancel.call(self, e);
-    },
-  false);
+    this.cancel.addEventListener('click',
+        function (e) {
+            self.getEvtCancel.call(self, e);
+        },
+    false);
     
 	this.reset.addEventListener('click',
 		function(e) {
@@ -148,9 +155,9 @@ Grid.prototype.addEvents = function () {
 		false);
 	
 	this.erase.addEventListener('click',
-	  function(e) {
-	    self.getEvtErase.call(self, e);
-	  },
+	    function(e) {
+	        self.getEvtErase.call(self, e);
+	    },
 	false);
 }
 
@@ -159,7 +166,7 @@ Grid.prototype.addEvents = function () {
  * ( asserted with stopPropagation() in the other click handlers )
  */
 Grid.prototype.getEvtBody = function (e) {
-		this.commands.className = 'hidden';
+    this.commands.className = 'hidden';
 }
 
 /*
@@ -195,7 +202,7 @@ Grid.prototype.getEvtChangeCell = function (e) {
 	
 	// check if value inserted is correct, otherwise change background to red
 	if (!this.game.respect(value, line, col)) {
-	  //removeClass(this.modifiedCell, 'right');
+	    //removeClass(this.modifiedCell, 'right');
 		addClass(this.modifiedCell, 'wrong');
 	}
 	else {
@@ -252,7 +259,7 @@ Grid.prototype.getEvtNewGame = function (e) {
  * Hide the new game "popup"
  */
 Grid.prototype.getEvtCancel = function (e) {
-  this.gameInfos.className = 'hidden';
+    this.gameInfos.className = 'hidden';
 	e.stopPropagation();
 }
 
