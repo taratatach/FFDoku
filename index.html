@@ -33,15 +33,6 @@
 			<h1>FFDoku</h1>
 			<h2>a Sudoku game</h2>
 		</header>
-		<footer>
-		    <nav>
-			    <ul id="menu">
-				    <li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
-				    <li><input type="button" id="reset" name="Reset" value="Reset" /></li>
-				    <li><input type="button" id="dispAbout" name="About" value="About" /></li>
-			    </ul>
-		    </nav>
-	    </footer>
 		<div id="content">
 		    <section>
 			    <table id="grid">
@@ -83,12 +74,22 @@
 		    </section>
 		    <section id="about">
 		        <p>
-				    Copyright (C) 2012 Erwan Guyader, Antoine Duparay<br />
-				    Licence AGPL v3 | <a href="https://github.com/taratatach/FFDoku" id="source">Source</a>
-				    <input type="button" id="ok" name="OK" value="OK" />
+				    Copyright &copy; 2012<br />
+				    Erwan Guyader &amp; Antoine Duparay<br />
+				    Licence AGPL v3 - <a href="https://github.com/taratatach/FFDoku">Source</a>
 			    </p>
+				<p><input type="button" id="ok" name="OK" value="OK" /></p>
 		    </section>
 		</div>
+		<footer>
+		    <nav>
+			    <ul id="menu">
+				    <li><input type="button" id="newGame" name="New Game" value="New Game" /></li>
+				    <li><input type="button" id="reset" name="Reset" value="Reset" /></li>
+				    <li><input type="button" id="dispAbout" name="About" value="About" /></li>
+			    </ul>
+		    </nav>
+	    </footer>
 		<script type="text/javascript">
 			window.addEventListener('load', init, false);
 			

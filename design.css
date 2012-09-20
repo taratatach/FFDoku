@@ -26,14 +26,18 @@ body {
     height: 90%;
     width: 95%;
 	text-align: center;
-	font-family: Ubuntu;
+	font-family: Ubuntu, sans-serif;
 	font-size: large;
+	background-color: #FBFBF9;
 }
 
 input {
+	box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
 	border: none;
 	min-width: 90px;
-	margin: 3px;
+	margin: 0px 5px;
 	padding: 5px;
 }
 
@@ -46,7 +50,9 @@ input.text {
 }
 
 header h1 {
+	font-family: Mozilla, sans-serif;
 	margin-bottom: 0px;
+	text-shadow: 2px 2px 3px #CDCDCB;
 }
 
 header h2 {
@@ -81,6 +87,9 @@ footer {
     position: absolute;
     height: 100%;
     width: 100%;
+	box-shadow: 0px 0px 2px black;
+	-webkit-box-shadow: 0px 0px 2px black;
+	-moz-box-shadow: 0px 0px 2px black;
 }
 
 #grid td {
@@ -109,9 +118,9 @@ footer {
 }
 
 .selected {
-    box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
-    -webkit-box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
-    -moz-box-shadow:inset 0px 0px 10px rgba(0,0,0,.5);
+    box-shadow:inset 0px 0px 5px 1px rgba(0,0,0,.5);
+    -webkit-box-shadow:inset 0px 0px 5px 1px rgba(0,0,0,.5);
+    -moz-box-shadow:inset 0px 0px 5px 1px rgba(0,0,0,.5);
 }
 
 .wrong {
@@ -157,9 +166,9 @@ footer {
 /* ------ Panneau d'affichage du about ------ */
 
 #about {
-    padding: 5px;
+    font-size: medium;
+    padding: 0px 12px;
     background-color: white;
-    width: 230px;
 }
 
 /* ------------------------------------------ */
