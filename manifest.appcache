@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# 17-11-2012
+
+CACHE:
+index.html
+Grid.class.js
+Game.class.js
+utils.js
+design.css
+
+NETWORK:
+*
