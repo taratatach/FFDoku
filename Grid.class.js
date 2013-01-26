@@ -37,8 +37,8 @@ function Grid (game) {
 	this.about = document.getElementById('about');
 	this.about.className = 'hidden';
  	this.newGame = document.getElementById('newGame');
-	this.startGame = document.getElementById('startGame');
-	this.cancel = document.getElementById('cancel');
+	this.cancel = document.querySelector('button[role="cancel"]');
+        this.levels = document.querySelectorAll('button[role="level"]');
  	this.reset = document.getElementById('reset');
  	this.dispAbout = document.getElementById('dispAbout');
  	this.ok = document.getElementById('ok');
@@ -133,12 +133,14 @@ Grid.prototype.addEvents = function () {
 		},
 	false);
 	
-	this.startGame.addEventListener('click',
-		function() {
-			self.getEvtStartGame.call(self);
-		},
-	false);
-
+    for (var i = this.levels.length - 1; i >= 0; i--) {
+	this.levels[i].addEventListener('click',
+					function (e) {
+					    self.getEvtStartGame.call(self, e);
+					},
+					false);
+    }
+    
     this.cancel.addEventListener('click',
         function (e) {
             self.getEvtCancel.call(self, e);
@@ -314,9 +316,9 @@ Grid.prototype.getEvtCancel = function (e) {
  * Hide the new game popup, delete the current grid, create a new game with the
  * Game class and create a new grid with the new revealed numbers
  */
-Grid.prototype.getEvtStartGame = function () {
-	var level = document.getElementById('level').value;
-	
+Grid.prototype.getEvtStartGame = function (evt) {
+	var level = evt.target.value;
+        console.log(level);
 	/* Create new game */
 	this.game.newGame(level);
 	

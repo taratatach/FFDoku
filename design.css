@@ -18,45 +18,27 @@
 
 */
 
-/* ------- ESSAI -------- */
-@-webkit-viewport{
-    width: device-width;
-}
-@-moz-viewport{
-    width: device-width;
-}
-@-ms-viewport{
-    width: device-width;
-}
-@-o-viewport{
-    width: device-width;
-}
-@viewport{
-    width: device-width;
-}
-/* ---------------------- */
-
 html {
     height: 100%;
 }
 
 body {
-    height: 90%;
-    width: 95%;
-	text-align: center;
-	font-family: Ubuntu, sans-serif;
-	font-size: large;
-	background-color: #FBFBF9;
+    margin: 0;
+    height: 100%;
+    font-family: Ubuntu, sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: #FBFBF9;
 }
 
 input {
-	box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
-	-webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
-	-moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
-	border: none;
-	min-width: 90px;
-	margin: 0px 0.75%;
-	padding: 5px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 0px 2px rgba(0,0,0,0.3);
+    border: none;
+    min-width: 90px;
+    margin: 0px 0.75%;
+    padding: 5px;
 }
 
 input:active {
@@ -67,36 +49,28 @@ input.text {
     font-weight: bold;
 }
 
-header h1 {
-	font-family: Mozilla, sans-serif;
-	margin-bottom: 0px;
-	text-shadow: 2px 2px 3px #CDCDCB;
+#drawer {
+    background-color: white;
+    height: 100%;
 }
 
-header h2 {
-	font-size: medium;
-	font-style: italic;
-	margin-top: 0px;
-}
+#drawer > header {
 
-footer {
-    height: 40px;
 }
 
 #content {
+    background-color: white;
     position: relative;
     text-align: center;
-    height: 75%;
-    max-width: 360px;
-    max-height: 360px;
-    margin-top: 2%;
-    margin-left: auto;
-    margin-right: auto;
+    width: 95%;
+    height: 65%;
+    margin: auto;
+    margin-top: 5%;
 }
 
-#grid, #commands, #gameInfos, #about {
-	border-collapse: collapse;
-	border: 2px solid black;
+#grid, #commands, #about {
+    border-collapse: collapse;
+    border: 2px solid black;
 }
 
 /* ------ La grille ----- */
@@ -105,34 +79,46 @@ footer {
     position: absolute;
     height: 100%;
     width: 100%;
-	box-shadow: 0px 0px 2px black;
-	-webkit-box-shadow: 0px 0px 2px black;
-	-moz-box-shadow: 0px 0px 2px black;
+    box-shadow: 0px 0px 2px black;
+    -webkit-box-shadow: 0px 0px 2px black;
+    -moz-box-shadow: 0px 0px 2px black;
 }
 
 #grid td {
-	width: 11.11%;
-	height: 11.11%;
-	border: 1px solid black;
+    width: 11.11%;
+    height: 11.11%;
+    border: 2px solid black;
 }
 
 #grid td.borderRight {
-	border-right: 2px solid black;
+    border-right: 3px solid black;
 }
 
 
 #grid td.borderBottom {
-	border-bottom: 2px solid black;
+    border-bottom: 3px solid black;
 }
 
 .number, .cell {
-	text-align: center;
+    text-align: center;
+}
+
+.icon-new {
+    background: url(images/new.png) no-repeat 50% 50% !important;
+}
+
+.icon-reset {
+    background: url(images/reset.png) no-repeat 50% 50% !important;
+}
+
+.icon-about {
+    background: url(images/about.png) no-repeat 50% 50% !important;
 }
 
 /* Les cases pré remplies */
 .number {
-	background-color: #BBBBBB;
-	font-weight: bold
+    background-color: #BBBBBB;
+    font-weight: bold
 }
 
 .selected {
@@ -142,51 +128,58 @@ footer {
 }
 
 .wrong {
-	background-color: red;
+    background-color: red;
 }
 
 /* ------ Le panneau de commandes ----- */
 
 #commands {
-	background-color: white;
-	width: 200px;
+    background-color: white;
+    width: 50%;
+    height: auto;
+    box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
+    -moz-box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
 }
 
 #commands table {
-	border-collapse: collapse;
-	width: 100%;
+    border-collapse: collapse;
+    width: 95%;
+    margin: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    height: 11rem;
 }
 
 #commands table td {
-	border: 1px solid black;
-	padding: 3px;
-	padding-top: 6px;
+    border: 2px solid black;
+    padding: 3px;
+    padding-top: 6px;
 }
 
-/* ------ Le menu nouveau jeu / fin jeu ----- */
-
-#gameInfos {
-	padding: 5px;
-	background-color: white;
-	height: 100px;
-	width: 230px;
-}
-
-#menu {
-	padding: 0px;
-	list-style-type: none;
-}
-
-#menu li {
-	display: inline;
+#erase {
+    width: auto !important;
+    height: 2rem !important;
+    line-height: 2rem !important;
 }
 
 /* ------ Panneau d'affichage du about ------ */
 
 #about {
-    font-size: medium;
-    padding: 0px 12px;
+    font-size: large;
+    padding-right: 7px;
+    padding-left: 7px;
     background-color: white;
+    box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
+    -webkit-box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
+    -moz-box-shadow:0px 0px 10px 3px rgba(0,0,0,.5);
+}
+
+#about button {
+    width: 30% !important;
+    height: 2rem !important;
+    line-height: 2rem !important;
+    margin-bottom: 10px !important;
 }
 
 /* ------------------------------------------ */
@@ -197,8 +190,20 @@ footer {
 
 .displayed {
     position: relative;
-	display: inline-block;
-	vertical-align: middle;
-	top: 25%;
-	z-index: 1;
+    display: inline-block;
+    vertical-align: middle;
+    top: 25%;
+    z-index: 1;
+}
+
+form[role="dialog"][data-type="action"] > header:first-child, 
+form[role="dialog"][data-type="object"] > header:first-child {
+    font-size: 3rem !important;
+    padding-top: 5rem !important;
+    height: 10rem !important;
+}
+
+form[role="dialog"][data-type="action"], 
+form[role="dialog"][data-type="object"] {
+    bottom: 3rem !important;
 }
