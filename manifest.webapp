@@ -2,10 +2,10 @@
   "version": "1.2",
   "name": "FFDoku",
   "description": "Sudoku",
-  "launch_path": "/index.html",
+  "launch_path": "/FFDoku/index.html",
   "developer": {
     "name": "taratatach",
-    "url": "http://taratatach.github.com/FFDoku"
+    "url": "https://github.com/taratatach/FFDoku"
   },
   "icons": {
     "128": "/icon.png",
