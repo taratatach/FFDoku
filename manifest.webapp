@@ -8,8 +8,8 @@
     "url": "https://github.com/taratatach/FFDoku"
   },
   "icons": {
-    "128": "/icon.png",
-    "64": "/icon-64.png"
+    "128": "/FFDoku/icon.png",
+    "64": "/FFDoku/icon-64.png"
   },
   "orientation": "portrait"
 }
