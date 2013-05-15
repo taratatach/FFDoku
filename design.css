@@ -50,23 +50,63 @@ input.text {
     font-weight: bold;
 }
 
+/* ------ La barre de titre ------ */
+
+#drawer > header {
+    height: 4rem;
+}
+
+#drawer > header:first-child {
+    margin-left: 0rem;
+}
+
+#drawer > header > h1 {
+    padding-top: 0.5rem;
+    font-size: 3rem;
+}
+
+#drawer > header .icon {
+    background-position: 
+}
+
+#drawer > header a {
+    width: 5rem !important;
+    height: 4rem !important;
+}
+
+#drawer > header a > span {
+    height: 4rem !important;
+}
+
+/* ------ Le panneau de settings ------ */
+
+section[data-type="sidebar"] > header {
+    height: 4rem !important;
+}
+
+section[data-type="sidebar"] h1 {
+    font-size: 2rem !important;
+    line-height: 4rem !important;
+}
+
+/* --------- */
+
 #drawer {
     background-color: white;
     height: 100%;
-}
-
-#drawer > header {
-
+    left: 0rem !important;
+    padding-left: 0rem !important;
 }
 
 #content {
     background-color: white;
     position: relative;
     text-align: center;
-    width: 95%;
-    height: 65%;
+    width: 30rem;
+    height: 30rem;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 5rem;
+    left: -0.2rem;
 }
 
 #grid, #commands, #about {
@@ -104,6 +144,12 @@ input.text {
     text-align: center;
 }
 
+/* ------ La barre de menu en bas ----- */
+
+footer > div[role="toolbar"], footer > div[role="toolbar"] button {
+    height: 4rem;
+}
+
 .icon-new {
     background: url(images/new.png) no-repeat 50% 50% !important;
 }
@@ -116,7 +162,8 @@ input.text {
     background: url(images/about.png) no-repeat 50% 50% !important;
 }
 
-/* Les cases pré remplies */
+
+/* ------ Les cases pré remplies ------ */
 .number {
     background-color: #BBBBBB;
     font-weight: bold
@@ -167,7 +214,8 @@ input.text {
 /* ------ Panneau d'affichage du about ------ */
 
 #about {
-    font-size: large;
+    width: 27rem;
+    font-size: 1.6rem;
     padding-right: 7px;
     padding-left: 7px;
     background-color: white;
@@ -178,9 +226,8 @@ input.text {
 
 #about button {
     width: 30% !important;
-    height: 2rem !important;
+    height: 3rem !important;
     line-height: 2rem !important;
-    margin-bottom: 10px !important;
 }
 
 /* ------------------------------------------ */
@@ -200,11 +247,11 @@ input.text {
 form[role="dialog"][data-type="action"] > header:first-child, 
 form[role="dialog"][data-type="object"] > header:first-child {
     font-size: 3rem !important;
-    padding-top: 5rem !important;
-    height: 10rem !important;
+    padding-top: 6rem !important;
+    height: 11rem !important;
 }
 
 form[role="dialog"][data-type="action"], 
 form[role="dialog"][data-type="object"] {
-    bottom: 3rem !important;
+    bottom: 4rem !important;
 }
