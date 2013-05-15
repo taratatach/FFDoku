@@ -1,12 +1,27 @@
 CACHE MANIFEST
-# 30-11-2012
+# 05-14-2013
 
 CACHE:
+
+# Main
 index.html
+icon.png
+icon-64.png
+
+# JS
 Grid.class.js
 Game.class.js
 utils.js
+include.js
+load.js
+
+# CSS
 design.css
+
+# IMAGES
+images/about.png
+images/new.png
+images/reset.png
 
 NETWORK:
 *
