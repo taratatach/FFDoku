@@ -1,6 +1,4 @@
-.project
 *~
-algo.c
-tp2/
-sudoku.js
-sudokuSolver.js
+
+# For mac
+.DS_Store
