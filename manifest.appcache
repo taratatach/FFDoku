@@ -1,27 +1,77 @@
 CACHE MANIFEST
-# 06-14-2013
+# 07-02-2013
 
 CACHE:
 
-# Main
+# MAIN
 index.html
-icon.png
-icon-64.png
+manifest.webapp
 
-# JS
-Grid.class.js
-Game.class.js
-utils.js
-include.js
-load.js
 
-# CSS
-design.css
+# ICONS
+./icons/icon-64.png
+./icons/icon.png
+./icons/icon.svg
 
-# IMAGES
-images/about.png
-images/new.png
-images/reset.png
+
+# SCRIPTS
+./script/Game.class.js
+./script/Grid.class.js
+./script/load.js
+./script/utils.js
+
+
+# Custom CSS
+./style/design.css
+./style/images/about.png
+./style/images/new.png
+./style/images/refresh.png
+./style/images/refresh@2x.png
+./style/images/reset.png
+
+
+# SHARED CSS
+./shared/style/action_menu.css
+./shared/style/buttons.css
+./shared/style/headers.css
+./shared/style_unstable/toolbars.css
+
+# SHARED IMAGES
+
+# Actions Menu
+./shared/style/action_menu/images/ui/alpha.png
+./shared/style/action_menu/images/ui/default.png
+./shared/style/action_menu/images/ui/gradient.png
+./shared/style/action_menu/images/ui/pattern.png
+
+# Buttons
+./shared/style/buttons/images/icons/dialog.png
+./shared/style/buttons/images/icons/dialog@2x.png
+./shared/style/buttons/images/icons/view.png
+./shared/style/buttons/images/icons/view@2x.png
+
+./shared/style/buttons/images/ui/danger-disabled.png
+./shared/style/buttons/images/ui/danger-press.png
+./shared/style/buttons/images/ui/danger.png
+./shared/style/buttons/images/ui/default.png
+./shared/style/buttons/images/ui/disabled.png
+./shared/style/buttons/images/ui/recommend.png
+./shared/style/buttons/images/ui/shadow.png
+./shared/style/buttons/images/ui/shadow@2x.png
+
+# Headers
+./shared/style/headers/images/icons/add.png
+./shared/style/headers/images/icons/add@2x.png
+./shared/style/headers/images/icons/user.png
+./shared/style/headers/images/icons/user@2x.png
+
+./shared/style/headers/images/ui/header.png
+./shared/style/headers/images/ui/noise-pattern.png
+./shared/style/headers/images/ui/separator-large.png
+./shared/style/headers/images/ui/separator.png
+./shared/style/headers/images/ui/shadow.png
+./shared/style/headers/images/ui/shadow@2x.png
+./shared/style/headers/images/ui/subheader.png
 
 NETWORK:
 *
