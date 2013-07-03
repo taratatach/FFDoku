@@ -3,7 +3,7 @@
 * ---------------------------------- */
 
 [role="toolbar"] {
-  height: 3rem;
+  height: 4rem;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -13,10 +13,10 @@
 }
 
 [role="toolbar"] ul {
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  float: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 [role="toolbar"] ul:last-child {
@@ -25,20 +25,18 @@
 
 [role="toolbar"] li {
   float: left;
-  width: 33%;
-  text-align: center;
 }
 
 [role="toolbar"] button {
-  width: 100%;
-  height: 3rem;
+  width: 5.5rem;
+  height: 4rem;
   border: none;
   font-size: 0;
-  background: transparent no-repeat 50% 50%;
+  background: transparent no-repeat 50% 50% / 3rem auto;
   padding: 0;
   border-radius: 0;
 }
 
 [role="toolbar"] button:active {
-  background-color: #008aaa !important;
+  background-color: #008aaa;
 }
