@@ -19,23 +19,27 @@
 /* To shuffle an array */
 Array.prototype.shuffle = function() {
   var s = [];
-  while (this.length)
+  while (this.length) {
     s.push(this.splice(Math.random() * this.length, 1));
-  while (s.length)
+  }
+  while (s.length) {
     this.push(s.pop());
+  }
   return this;
-}
+};
 
 /* To add a class to a node */
 function addClass(node, className) {
-    var classes = node.className.split(" ");
-    var i = 0;
+  var classes = node.className.split(" ");
+  var i = 0;
 
-    while (i < classes.length && classes[i] != className)
-        i++;
+  while (i < classes.length && classes[i] != className) {
+    i++;
+  }
 
-    if (i >= classes.length)
-        node.className += " " + className;
+  if (i >= classes.length) {
+    node.className += " " + className;
+  }
 }
 
 /* To remove a class from a node */
@@ -43,11 +47,13 @@ function removeClass(node, className) {
   var classes = node.className.split(" ");
   var i = 0;
 
-  while (i < classes.length && classes[i] != className)
+  while (i < classes.length && classes[i] != className) {
     i++;
+  }
 
-  if (i < classes.length)
+  if (i < classes.length){
     classes.splice(i, 1);
+  }
 
   node.className = classes.join(" ");
 }

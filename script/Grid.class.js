@@ -28,20 +28,20 @@ function Grid (game) {
   /* Initialize attributes */
   this.game = game;
 
-  this.commands = document.getElementById('commands');
-  this.commands.className = 'hidden';
-  this.gameInfos = document.getElementById('gameInfos');
-  this.gameInfos.className = 'hidden';
-  this.about = document.getElementById('about');
-  this.about.className = 'hidden';
-  this.newGame = document.getElementById('newGame');
+  this.commands = document.getElementById("commands");
+  this.commands.className = "hidden";
+  this.gameInfos = document.getElementById("gameInfos");
+  this.gameInfos.className = "hidden";
+  this.about = document.getElementById("about");
+  this.about.className = "hidden";
+  this.newGame = document.getElementById("newGame");
   this.cancel = document.querySelector('button[role="cancel"]');
   this.levels = document.querySelectorAll('button[role="level"]');
-  this.reset = document.getElementById('reset');
-  this.dispAbout = document.getElementById('dispAbout');
-  this.ok = document.getElementById('ok');
-  this.inserts = document.getElementsByClassName('insert');
-  this.erase = document.getElementById('erase');
+  this.reset = document.getElementById("reset");
+  this.dispAbout = document.getElementById("dispAbout");
+  this.ok = document.getElementById("ok");
+  this.inserts = document.getElementsByClassName("insert");
+  this.erase = document.getElementById("erase");
 
   this.initGrid(this.game.baseGrid);
   this.addEvents();
@@ -53,34 +53,37 @@ function Grid (game) {
  */
 Grid.prototype.initGrid = function (gameGrid) {
   var self = this;
-  var table = document.getElementById('grid');
+  var table = document.getElementById("grid");
 
   this.cells = [];
-  for (var i=0; i<9; i++) {
-    var tr = document.createElement('tr');
+  for (var i = 0; i < 9; i++) {
+    var tr = document.createElement("tr");
     table.appendChild(tr);
 
     this.cells[i] = [];
-    for (var j=0; j<9; j++) {
-      var td = document.createElement('td');
+    for (var j = 0; j < 9; j++) {
+      var td = document.createElement("td");
 
       if (!gameGrid[i][j]) {
-        td.id = String((i+1) + '-' + (j+1));
-        td.className = 'cell';
-      }
-      else {
-        td.className = 'number';
+        td.id = String((i + 1) + "-" + (j + 1));
+        td.className = "cell";
+      } else {
+        td.className = "number";
         td.innerHTML = gameGrid[i][j];
       }
 
-      if (i % 3 == 2)
-          addClass(td, 'borderBottom');
-      if (i % 3 == 0)
-          addClass(td, 'borderTop');
-      if (j % 3 == 2)
-          addClass(td, 'borderRight');
-      if (j % 3 == 0)
-          addClass(td, 'borderLeft');
+      if (i % 3 == 2) {
+        addClass(td, "borderBottom");
+      }
+      if (i % 3 == 0) {
+        addClass(td, "borderTop");
+      }
+      if (j % 3 == 2) {
+        addClass(td, "borderRight");
+      }
+      if (j % 3 == 0) {
+        addClass(td, "borderLeft");
+      }
 
       tr.appendChild(td);
 
@@ -90,7 +93,7 @@ Grid.prototype.initGrid = function (gameGrid) {
 
   /* Add events */
   self.addCellEvents.call(self);
-}
+};
 
 /*
  * Add events to every cell
@@ -98,16 +101,16 @@ Grid.prototype.initGrid = function (gameGrid) {
 Grid.prototype.addCellEvents = function () {
   var self = this;
 
-  var cells = document.getElementsByClassName('cell');
-  for(var i=0; i<cells.length; i++) {
-    cells[i].addEventListener('click', function(e) {
+  var cells = document.getElementsByClassName("cell");
+  for(var i = 0; i < cells.length; i++) {
+    cells[i].addEventListener("click", function(e) {
       self.getEvtClickCell.call(self, e);
     }, false);
-    cells[i].addEventListener('change', function(e) {
+    cells[i].addEventListener("change", function(e) {
       self.getEvtChangeCell.call(self, e);
     }, false);
   }
-}
+};
 
 /*
  * Add events to every button but also the body itself
@@ -115,54 +118,54 @@ Grid.prototype.addCellEvents = function () {
 Grid.prototype.addEvents = function () {
   var self = this;
 
-  document.addEventListener('click', function(e) {
+  document.addEventListener("click", function(e) {
     self.getEvtBody.call(self, e);
   }, false);
 
-  this.newGame.addEventListener('click', function(e) {
+  this.newGame.addEventListener("click", function(e) {
     self.getEvtNewGame.call(self, e);
   }, false);
 
   for (var i = this.levels.length - 1; i >= 0; i--) {
-    this.levels[i].addEventListener('click', function (e) {
+    this.levels[i].addEventListener("click", function (e) {
       self.getEvtStartGame.call(self, e);
     }, false);
   }
 
-  this.cancel.addEventListener('click', function (e) {
+  this.cancel.addEventListener("click", function (e) {
     self.getEvtCancel.call(self, e);
   }, false);
 
-  this.reset.addEventListener('click', function(e) {
+  this.reset.addEventListener("click", function(e) {
     self.getEvtReset.call(self, e);
   }, false);
 
-  this.dispAbout.addEventListener('click', function(e) {
+  this.dispAbout.addEventListener("click", function(e) {
     self.getEvtAbout.call(self, e);
   }, false);
 
-  this.ok.addEventListener('click', function (e) {
+  this.ok.addEventListener("click", function (e) {
     self.getEvtCancelAbout.call(self, e);
   }, false);
 
-  for(var i=0; i<this.inserts.length; i++) {
-    this.inserts[i].addEventListener('click', function(e) {
+  for(var n = 0; n < this.inserts.length; n++) {
+    this.inserts[n].addEventListener("click", function(e) {
       self.getEvtInsert.call(self, e);
     }, false);
   }
 
-  this.erase.addEventListener('click', function(e) {
+  this.erase.addEventListener("click", function(e) {
     self.getEvtErase.call(self, e);
   }, false);
-}
+};
 
 /*
  * Called when body is clicked but no other event is called before
  * ( asserted with stopPropagation() in the other click handlers )
  */
-Grid.prototype.getEvtBody = function (e) {
-  this.commands.className = 'hidden';
-}
+Grid.prototype.getEvtBody = function () {
+  this.commands.className = "hidden";
+};
 
 /*
  * Called when a cell is clicked, either with a revealed number or
@@ -170,24 +173,23 @@ Grid.prototype.getEvtBody = function (e) {
  * Change the visibility of the insertion "popup"
  */
 Grid.prototype.getEvtClickCell = function (e) {
-  if (this.gameInfos.className == 'hidden' && this.about.className == 'hidden') {
-    if (this.commands.className == 'hidden') {
+  if (this.gameInfos.className == "hidden" && this.about.className == "hidden") {
+    if (this.commands.className == "hidden") {
       if (this.modifiedCell) {
-        removeClass(this.modifiedCell, 'selected');
+        removeClass(this.modifiedCell, "selected");
       }
 
       this.modifiedCell = e.target;
-      addClass(this.modifiedCell, 'selected');
+      addClass(this.modifiedCell, "selected");
 
-      var strs = this.modifiedCell.id.split('-');
-      this.commands.className = 'displayed';
-    }
-    else {
-      this.commands.className = 'hidden';
+      // var strs = this.modifiedCell.id.split("-");
+      this.commands.className = "displayed";
+    } else {
+      this.commands.className = "hidden";
     }
     e.stopPropagation();
   }
-}
+};
 
 /*
  * Called when the content of an editable cell is changed.
@@ -200,94 +202,93 @@ Grid.prototype.getEvtChangeCell = function (e) {
 
   // get cell value, cell line and cell column
   var value = this.modifiedCell.innerHTML;
-  var strs = this.modifiedCell.id.split('-');
-  var line = parseInt(strs[0])-1;
-  var col = parseInt(strs[1])-1;
+  var strs = this.modifiedCell.id.split("-");
+  var line = parseInt(strs[0]) - 1;
+  var col = parseInt(strs[1]) - 1;
 
   // check if value inserted is correct, otherwise change background to red
   if (!this.game.respect(value, line, col)) {
     //removeClass(this.modifiedCell, 'right');
-    addClass(this.modifiedCell, 'wrong');
-  }
-  else {
-    removeClass(this.modifiedCell, 'wrong');
+    addClass(this.modifiedCell, "wrong");
+  } else {
+    removeClass(this.modifiedCell, "wrong");
     //addClass(this.modifiedCell, 'right');
   }
 
   // insert value in Game.grid
   this.game.changeValue(value,  line, col);
-}
+};
 
 /*
  * Called when the user clicks on a number in the insertion "popup"
  */
 Grid.prototype.getEvtInsert = function (e) {
   this.modifiedCell.innerHTML = e.target.innerHTML;
-  this.commands.className = 'hidden';
-  var event = document.createEvent('HTMLEvents');
-  event.initEvent('change',true,false);
+  this.commands.className = "hidden";
+  var event = document.createEvent("HTMLEvents");
+  event.initEvent("change",true,false);
   this.modifiedCell.dispatchEvent(event);
   e.stopPropagation();
-}
+};
 
 /*
  * Called when the user clicks on the Erase button in the insertion "popup"
  */
 Grid.prototype.getEvtErase = function(e) {
   // get cell line and cell column
-  var strs = this.modifiedCell.id.split('-');
-  var line = parseInt(strs[0])-1;
-  var col = parseInt(strs[1])-1;
+  var strs = this.modifiedCell.id.split("-");
+  var line = parseInt(strs[0]) - 1;
+  var col = parseInt(strs[1]) - 1;
 
   // insert null value in Game.grid
   this.game.changeValue(null,  line, col);
 
-  this.modifiedCell.innerHTML = '';
+  this.modifiedCell.innerHTML = "";
   //removeClass(this.modifiedCell, 'right');
-  removeClass(this.modifiedCell, 'wrong');
-  this.commands.className = 'hidden';
+  removeClass(this.modifiedCell, "wrong");
+  this.commands.className = "hidden";
   e.stopPropagation();
- }
+};
 
 /*
  * Called when the user clicks on the New Game button
  * Shows the new game "popup"
  */
 Grid.prototype.getEvtNewGame = function (e) {
-  if (this.commands.className == 'hidden' && this.about.className == 'hidden') {
-    this.gameInfos.className = 'displayed';
+  if (this.commands.className == "hidden" && this.about.className == "hidden") {
+    this.gameInfos.className = "displayed";
     e.stopPropagation();
   }
-}
+};
 
 /*
  * Called when the user clicks on the About button
  * Shows the about "popup"
  */
 Grid.prototype.getEvtAbout = function (e) {
-  if (this.commands.className == 'hidden' && this.gameInfos.className == 'hidden') {
-    this.about.className = 'displayed';
+  if (this.commands.className == "hidden" && this.gameInfos.className == "hidden") {
+    this.about.className = "displayed";
     e.stopPropagation();
   }
-}
+};
 
 /*
  * Called when the user clicks on the Cancel button in the about "popup"
  * Hide the about "popup"
  */
 Grid.prototype.getEvtCancelAbout = function (e) {
-  this.about.className = 'hidden';
+  this.about.className = "hidden";
   e.stopPropagation();
-}
+};
 
 /*
  * Called when the user clicks on the Cancel button in the new game "popup"
  * Hide the new game "popup"
  */
 Grid.prototype.getEvtCancel = function (e) {
-  this.gameInfos.className = 'hidden';
+  this.gameInfos.className = "hidden";
   e.stopPropagation();
-}
+};
 
 /*
  * Called when the user clicks on the Start Game button in the new game "popup"
@@ -296,19 +297,19 @@ Grid.prototype.getEvtCancel = function (e) {
  */
 Grid.prototype.getEvtStartGame = function (evt) {
   var level = evt.target.value;
-  console.log(level);
+
   /* Create new game */
   this.game.newGame(level);
 
   /* delete previous grid */
-  var table =  document.getElementById('grid');
-  table.innerHTML = '';
+  var table =  document.getElementById("grid");
+  table.innerHTML = "";
 
   /* init new grid */
   this.initGrid(this.game.baseGrid);
 
-  this.gameInfos.className = 'hidden';
-}
+  this.gameInfos.className = "hidden";
+};
 
 /*
  * Called when the user clicks on the Reset button
@@ -316,18 +317,18 @@ Grid.prototype.getEvtStartGame = function (evt) {
  * from the Game class
  */
 Grid.prototype.getEvtReset = function (e) {
-  if (this.commands.className == 'hidden'
-    && this.gameInfos.className == 'hidden'
-    && this.about.className == 'hidden') {
+  if (this.commands.className == "hidden"
+    && this.gameInfos.className == "hidden"
+    && this.about.className == "hidden") {
     this.game.resetGame();
 
     /* delete previous grid */
-    var table =  document.getElementById('grid');
-    table.innerHTML = '';
+    var table =  document.getElementById("grid");
+    table.innerHTML = "";
 
     /* init new grid */
     this.initGrid(this.game.baseGrid);
 
     e.stopPropagation();
   }
-}
+};

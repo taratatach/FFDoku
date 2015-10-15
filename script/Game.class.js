@@ -21,9 +21,9 @@
  */
 function Game(level) {
   this.levels = {
-    'easy' : 28,
-    'medium' : 23,
-    'hard' : 20
+    "easy" : 28,
+    "medium" : 23,
+    "hard" : 20
   };
 
   this.newGame(level);
@@ -44,7 +44,7 @@ Game.prototype.init = function () {
   this.sqrsTaken = [];
 
 
-  for (var i=0; i<9; i++) {
+  for (var i = 0; i < 9; i++) {
     this.linesTaken[i] = [0,0,0,0,0,0,0,0,0];
     this.colsTaken[i] = [0,0,0,0,0,0,0,0,0];
     this.sqrsTaken[i] = [0,0,0,0,0,0,0,0,0];
@@ -53,7 +53,7 @@ Game.prototype.init = function () {
     this.baseGrid[i] = [];
     this.solvGrid[i] = [];
   }
-}
+};
 
 /*
  * Calls the init function and the grid generation functions
@@ -63,7 +63,7 @@ Game.prototype.newGame = function (level) {
   this.generateGrid(81);
   this.generateRevealed(this.levels[level]);
   this.currGrid = this.baseGrid.map(Array.splice, [0, 9]);
-}
+};
 
 /*
  * Called when a value is inserted by the player
@@ -76,12 +76,11 @@ Game.prototype.changeValue = function(nb, l, c) {
     }
     this.currGrid[l][c] = nb;
     this.setTaken(nb, l, c);
-  }
-  else {
+  } else {
     this.setFree(this.currGrid[l][c], l, c);
     this.currGrid[l][c] = null;
   }
-}
+};
 
 /*
  * Called whenever we want to check if the given number
@@ -92,8 +91,8 @@ Game.prototype.respect = function (nb, l, c) {
   var sqr = ~~(l / 3) * 3 + ~~(c / 3);
 
   /* Check if the number isn't already present in the line, column or square */
-  return ((!this.linesTaken[l][nb-1] && !this.colsTaken[c][nb-1]) && !this.sqrsTaken[sqr][nb-1]);
-}
+  return ((!this.linesTaken[l][nb - 1] && !this.colsTaken[c][nb - 1]) && !this.sqrsTaken[sqr][nb - 1]);
+};
 
 /*
  * Called when the player wants to reset the game
@@ -104,10 +103,10 @@ Game.prototype.resetGame = function () {
     return l.slice(0, 9);
   });
 
-  for (var i=0; i<9; i++) {
-    this.linesTaken[i] = [0,0,0,0,0,0,0,0,0];
-    this.colsTaken[i] = [0,0,0,0,0,0,0,0,0];
-    this.sqrsTaken[i] = [0,0,0,0,0,0,0,0,0];
+  for (var n = 0; n < 9; n++) {
+    this.linesTaken[n] = [0,0,0,0,0,0,0,0,0];
+    this.colsTaken[n] = [0,0,0,0,0,0,0,0,0];
+    this.sqrsTaken[n] = [0,0,0,0,0,0,0,0,0];
   }
 
   for (var i = 0; i < 9; i++) {
@@ -117,7 +116,7 @@ Game.prototype.resetGame = function () {
       }
     }
   }
-}
+};
 
 /*
  * Generates the 81 numbers starting in case [0,0]
@@ -141,16 +140,16 @@ Game.prototype.generateGrid = function (nbNumbersLeft) {
     if (this.respect(c, i, j)) {
       this.solvGrid[i][j] =  c;
       this.setTaken(c, i, j);
-      if (this.generateGrid(nbNumbersLeft-1)) {
+
+      if (this.generateGrid(nbNumbersLeft - 1)) {
         return true;
       }
-      else {
-        this.setFree(c, i, j);
-      }
+
+      this.setFree(c, i, j);
     }
     n++;
   } while(n < possibles.length);
-}
+};
 
 /*
  * Once the solved grid with the 81 numbers is generated,
@@ -166,14 +165,14 @@ Game.prototype.generateRevealed = function(nbNumbers) {
 
     this.baseGrid[i][j] = this.solvGrid[i][j];
   }
-  for (var i=0; i<9; i++) {
-    for (var j=0; j<9; j++) {
-      if (!this.baseGrid[i][j]) {
-        this.setFree(this.solvGrid[i][j], i, j);
+  for (var n = 0; n < 9; n++) {
+    for (var m = 0; m < 9; m++) {
+      if (!this.baseGrid[n][m]) {
+        this.setFree(this.solvGrid[n][m], n, m);
       }
     }
   }
-}
+};
 
 /*
  * Set the taken boolean of the given line, column and square (calculated)
@@ -181,15 +180,15 @@ Game.prototype.generateRevealed = function(nbNumbers) {
  */
 Game.prototype.setTaken = function (nb, l, c) {
   /* Set the number as present in the line */
-  this.linesTaken[l][nb-1]++;
+  this.linesTaken[l][nb - 1]++;
 
   /* Set the number as present in the column */
-  this.colsTaken[c][nb-1]++;
+  this.colsTaken[c][nb - 1]++;
 
   /* Set the number as present in the 3*3 square */
   var sqr = ~~(l / 3) * 3 + ~~(c / 3);
-  this.sqrsTaken[sqr][nb-1]++;
-}
+  this.sqrsTaken[sqr][nb - 1]++;
+};
 
 /*
  * Set the taken boolean of the given line, column and square (calculated)
@@ -197,15 +196,15 @@ Game.prototype.setTaken = function (nb, l, c) {
  */
 Game.prototype.setFree = function (nb, l, c) {
   /* Set the number as not present in the line */
-  this.linesTaken[l][nb-1]--;
+  this.linesTaken[l][nb - 1]--;
 
   /* Set the number as not present in the column */
-  this.colsTaken[c][nb-1]--;
+  this.colsTaken[c][nb - 1]--;
 
   /* Set the number as not present in the 3*3 square */
   var sqr = ~~(l / 3) * 3 + ~~(c / 3);
-  this.sqrsTaken[sqr][nb-1]--;
-}
+  this.sqrsTaken[sqr][nb - 1]--;
+};
 
 /*
  * Returns the number of numbers already revealed in the given line
@@ -218,7 +217,7 @@ Game.prototype.countTakenLine = function (l) {
   }
 
   return n;
-}
+};
 
 /*
  * Returns the number of numbers already revealed in the given column
@@ -231,7 +230,7 @@ Game.prototype.countTakenCol = function (c) {
   }
 
   return n;
-}
+};
 
 /*
  * Returns the number of numbers already revealed in the given square
@@ -248,4 +247,4 @@ Game.prototype.countTakenSqr = function (l, c) {
   }
 
   return n;
-}
+};
